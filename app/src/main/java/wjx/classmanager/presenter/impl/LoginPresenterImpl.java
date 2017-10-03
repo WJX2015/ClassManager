@@ -31,11 +31,6 @@ public class LoginPresenterImpl implements LoginPrestener {
         if(StringUtil.checkUserName(username)){
             if(StringUtil.checkPassword(password)){
                 loginBmob(username,password);
-                if(true){
-                    mLogInView.onLoginSuccess();
-                }else{
-                    mLogInView.onLoginFailed();
-                }
             }else{
                 mLogInView.onPasswordError("密码格式有误");
             }

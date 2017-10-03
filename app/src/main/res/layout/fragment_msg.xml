@@ -4,9 +4,8 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:text="Fragment one"
-        android:gravity="center"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_msg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

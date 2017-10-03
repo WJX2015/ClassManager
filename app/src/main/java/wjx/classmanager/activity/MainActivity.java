@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.hyphenate.chat.EMClient;
 
 import wjx.classmanager.R;
+import wjx.classmanager.fragment.FragmentFactory;
 import wjx.classmanager.fragment.ManageFragment;
 import wjx.classmanager.fragment.MessageFragment;
 import wjx.classmanager.fragment.NotifyFragment;
@@ -77,9 +78,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mTransaction =mFragmentManager.beginTransaction();
 
         //创建Fragment
-        MessageFragment messageFragment = new MessageFragment();
-        NotifyFragment notifyFragment = new NotifyFragment();
-        ManageFragment manageFragment = new ManageFragment();
+        MessageFragment messageFragment = (MessageFragment) FragmentFactory.getFragment(FragmentFactory.MESSAGE);
+        NotifyFragment notifyFragment = (NotifyFragment) FragmentFactory.getFragment(FragmentFactory.NOTIFY);
+        ManageFragment manageFragment = (ManageFragment) FragmentFactory.getFragment(FragmentFactory.MANAGE);
 
         //管理Fragment
         mFragments = new Fragment[FRAGMENT_COUNT];

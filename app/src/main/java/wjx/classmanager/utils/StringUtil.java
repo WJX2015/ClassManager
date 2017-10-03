@@ -7,7 +7,7 @@ package wjx.classmanager.utils;
 public class StringUtil {
 
     //用户名、密码的匹配规则
-    private static final String USER_NAME_REGEX="^[a-zA-Z]\\w{8,18}$";
+    private static final String USER_NAME_REGEX="^[a-zA-Z]\\w{6,16}$";
     private static final String PASSWORD_REGEX = "^[0-9]{6,16}$";
 
     public static boolean checkUserName(String userName){

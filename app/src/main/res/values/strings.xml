@@ -4,7 +4,7 @@
 
     <!--主界面底部TAB-->
     <string name="message">消息</string>
-    <string name="notification">通知</string>
+    <string name="notification">班级成员</string>
     <string name="manage">管理</string>
 
     <!--主界面菜单选项-->

@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.impl.LoginPresenterImpl;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.LogInView;
 
 public class LogInActivity extends BaseActivity implements View.OnClickListener,LogInView{
@@ -69,16 +70,34 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onLoginSuccess() {
         hideProgress();
+        showToast("登录成功");
+        if(isFirstLogin()){
+            startActivity(NavigationActivity.class);
+        }else{
+            startActivity(MainActivity.class);
+        }
+        finish();
     }
 
     @Override
     public void onLoginFailed() {
-        showToast("");
+        showToast("登录失败");
         hideProgress();
     }
 
     @Override
     public void onStartLogin() {
         showProgress("登录中...");
+    }
+
+    /**
+     * 判断用户是否第一次启动应用
+     * @return
+     */
+    public boolean isFirstLogin(){
+        if(SPUtil.getFirstRunTag(mContext)){
+            return true;
+        }
+        return false;
     }
 }

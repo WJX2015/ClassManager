@@ -10,13 +10,15 @@ import android.preference.PreferenceManager;
 
 public class SPUtil {
 
+    private static final String KEY="first";
+
     /**
      * @param context 获取导航页上下文
      * @return 是否第一次使用应用
      */
-    public static boolean getFirstRunTag(Context context, String key) {
+    public static boolean getFirstRunTag(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean hasTag = sp.getBoolean(key, true);
+        boolean hasTag = sp.getBoolean(KEY, true);
         return hasTag;
     }
 
@@ -26,10 +28,10 @@ public class SPUtil {
      * @param context
      * @param isFirst
      */
-    public static void addFirstRunTag(Context context, String key, boolean isFirst) {
+    public static void addFirstRunTag(Context context,boolean isFirst) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(key, isFirst);
+        editor.putBoolean(KEY, isFirst);
         editor.commit();
     }
 

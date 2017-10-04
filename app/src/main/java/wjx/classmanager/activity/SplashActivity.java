@@ -23,7 +23,7 @@ public class SplashActivity extends BaseActivity implements SplashView{
         mSplashPresent =new SplashPresentImpl(this);
         mImageView = (ImageView) findViewById(R.id.splash_image);
         mImageView.setAlpha(0.4f);
-        mImageView.animate().alpha(1.0f).setDuration(2000).start();
+        mImageView.animate().alpha(1.0f).setDuration(2500).start();
 
         ThreadUtil.runOnBackgroundThread(new Runnable() {
             @Override

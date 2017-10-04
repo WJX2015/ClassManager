@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Collections;
 import java.util.List;
 
 import wjx.classmanager.model.Message;
@@ -18,6 +17,7 @@ import wjx.classmanager.widget.MessageItemView;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
 
     private List<Message> mMessages;
+    private int mMessagePosition;
 
     public MessageAdapter(List<Message> messages) {
         mMessages = messages;
@@ -55,6 +55,34 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
+    }
+
+    /**
+     * 新增一条消息
+     * @param message
+     */
+    public void addMessage(Message message){
+        if(checkMessageType(message.getType())){
+            mMessages.remove(mMessagePosition);
+        }
+        mMessages.add(0,message);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 消息列表中是否已存在这种消息类型
+     * @param type
+     * @return
+     */
+    private boolean checkMessageType(int type){
+        for(int i=0;i<mMessages.size();i++){
+            if(mMessages.get(i).getType()==type){
+                mMessagePosition=i;
+                return true;
+            }
+        }
+        mMessagePosition=-1;
+        return false;
     }
 
     class MessageViewHolder extends RecyclerView.ViewHolder {

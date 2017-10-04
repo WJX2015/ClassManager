@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 switch (checkedId){
                     case R.id.radio_msg:
                         showFragment(FRAGMENT_MSG);
+
                         break;
                     case R.id.radio_notify:
                         showFragment(FRAGMENT_NOTIFY);
@@ -146,6 +147,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mTransaction.show(mFragments[index]);
         mTransaction.replace(mFrameLayouts[index].getId(),mFragments[index]);
         mTransaction.commit();
+    }
+
+    private void showBackground(int index){
 
     }
 

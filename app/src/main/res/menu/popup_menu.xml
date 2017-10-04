@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_create"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/menu_create"
         android:title="@string/create_class"/>
     <item
         android:id="@+id/menu_join"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/menu_join"
         android:title="@string/join_class"/>
     <item
         android:id="@+id/menu_scan"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/menu_scan"
         android:title="@string/scan_code"/>
 </menu>

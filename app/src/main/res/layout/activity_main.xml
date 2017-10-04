@@ -50,12 +50,17 @@
                     android:layout_weight="1"/>
 
                 <RadioGroup
+                    android:background="@color/bg_gray"
+                    android:layout_gravity="center"
                     android:id="@+id/radio_group"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:checked="true"
+                        android:textColor="@color/main_msg_color"
+                        android:drawableTop="@drawable/main_msg_selector"
                         android:id="@+id/radio_msg"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -66,6 +71,8 @@
                         android:textSize="20sp"/>
 
                     <RadioButton
+                        android:textColor="@color/main_member_color"
+                        android:drawableTop="@drawable/main_member_selector"
                         android:id="@+id/radio_notify"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -76,6 +83,8 @@
                         android:textSize="20sp"/>
 
                     <RadioButton
+                        android:textColor="@color/main_manage_color"
+                        android:drawableTop="@drawable/main_manage_selector"
                         android:id="@+id/radio_manage"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"

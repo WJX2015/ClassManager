@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/item_msg_ll"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
+        <ImageView
         android:layout_margin="5dp"
         android:id="@+id/item_icon"
         android:layout_width="40dp"
@@ -20,6 +25,8 @@
         <TextView
             android:id="@+id/item_title"
             android:text="消息标题"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -38,5 +45,10 @@
         android:id="@+id/item_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    </LinearLayout>
 
+    <View
+        android:background="@color/bg_gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 </LinearLayout>

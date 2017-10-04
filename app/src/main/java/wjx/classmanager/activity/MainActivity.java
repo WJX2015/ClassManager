@@ -9,8 +9,6 @@ import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import com.hyphenate.chat.EMClient;
-
 import wjx.classmanager.R;
 import wjx.classmanager.fragment.FragmentFactory;
 import wjx.classmanager.fragment.ManageFragment;
@@ -19,12 +17,15 @@ import wjx.classmanager.fragment.NotifyFragment;
 import wjx.classmanager.widget.SlideMenu;
 import wjx.classmanager.widget.TitleBar;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+import static wjx.classmanager.model.Constant.FragmentType.CREATE_MANAGE;
+import static wjx.classmanager.model.Constant.FragmentType.CREATE_MESSAGE;
+import static wjx.classmanager.model.Constant.FragmentType.CREATE_NOTIFY;
+import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_COUNT;
+import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MANAGE;
+import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MSG;
+import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_NOTIFY;
 
-    private static final int FRAGMENT_MSG=0;
-    private static final int FRAGMENT_NOTIFY=1;
-    private static final int FRAGMENT_MANAGE=2;
-    private static final int FRAGMENT_COUNT=3;
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private SlideMenu mSlideMenu;
     private TitleBar mTitleBar;
@@ -78,9 +79,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mTransaction =mFragmentManager.beginTransaction();
 
         //创建Fragment
-        MessageFragment messageFragment = (MessageFragment) FragmentFactory.getFragment(FragmentFactory.MESSAGE);
-        NotifyFragment notifyFragment = (NotifyFragment) FragmentFactory.getFragment(FragmentFactory.NOTIFY);
-        ManageFragment manageFragment = (ManageFragment) FragmentFactory.getFragment(FragmentFactory.MANAGE);
+        MessageFragment messageFragment = (MessageFragment) FragmentFactory.getFragment(CREATE_MESSAGE);
+        NotifyFragment notifyFragment = (NotifyFragment) FragmentFactory.getFragment(CREATE_NOTIFY);
+        ManageFragment manageFragment = (ManageFragment) FragmentFactory.getFragment(CREATE_MANAGE);
 
         //管理Fragment
         mFragments = new Fragment[FRAGMENT_COUNT];

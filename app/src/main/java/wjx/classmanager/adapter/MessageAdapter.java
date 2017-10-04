@@ -1,8 +1,11 @@
 package wjx.classmanager.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Collections;
 import java.util.List;
 
 import wjx.classmanager.model.Message;
@@ -12,7 +15,7 @@ import wjx.classmanager.widget.MessageItemView;
  * Created by wjx on 2017/10/3.
  */
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
 
     private List<Message> mMessages;
 
@@ -28,6 +31,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(MessageViewHolder holder, final int position) {
         holder.mMessageItemView.bindView(mMessages.get(position));
+        holder.mMessageItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("========",position+"");
+                //Collections.swap(mMessages, position,0);
+                Message message =mMessages.get(position);
+                mMessages.remove(position);
+                mMessages.add(0,message);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

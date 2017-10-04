@@ -9,7 +9,6 @@ import java.util.List;
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.MessageAdapter;
 import wjx.classmanager.model.Message;
-import wjx.classmanager.widget.RecycleViewDivider;
 
 /**
  * Created by wjx on 2017/9/16.
@@ -42,7 +41,7 @@ public class MessageFragment extends BaseFragment{
             Message message=new Message();
             message.setIcon(R.drawable.title_bar_icon);
             message.setTitle("标题");
-            message.setTime("2017-10-03");
+            message.setTime("2017-10-03"+"  ,"+i);
             mMessages.add(message);
         }
     }

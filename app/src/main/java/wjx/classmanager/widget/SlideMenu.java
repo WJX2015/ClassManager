@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -132,11 +133,9 @@ public class SlideMenu extends HorizontalScrollView {
     @Override   //第三步
     public boolean onTouchEvent(MotionEvent ev) {
         mVelocityTracker.addMovement(ev);
-
-        int action = ev.getAction();
         int x = (int) ev.getX();
 
-        switch (action) {
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
                 mVelocityTracker.computeCurrentVelocity(1000);
 
@@ -219,11 +218,8 @@ public class SlideMenu extends HorizontalScrollView {
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (isOpen) {
-            return true;
-        }
-        return super.onInterceptTouchEvent(ev);
+    public boolean onInterceptHoverEvent(MotionEvent event) {
+        return super.onInterceptHoverEvent(event);
     }
 
     @Override

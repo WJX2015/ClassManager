@@ -10,6 +10,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import wjx.classmanager.presenter.LoginPrestener;
 import wjx.classmanager.utils.StringUtil;
+import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.LogInView;
 
 /**
@@ -73,7 +74,12 @@ public class LoginPresenterImpl implements LoginPrestener {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
                 Log.d("main", "登录聊天服务器成功！");
-                mLogInView.onLoginSuccess();
+                ThreadUtil.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mLogInView.onLoginSuccess();
+                    }
+                });
             }
 
             @Override

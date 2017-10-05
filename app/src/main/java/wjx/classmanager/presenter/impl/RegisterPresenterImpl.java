@@ -5,6 +5,7 @@ import android.text.Spanned;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 
@@ -121,7 +122,11 @@ public class RegisterPresenterImpl implements RegisterPresenter {
                         public void run() {
                             Log.e( "run: ","环信注册不成功" );
                             mRegisterView.hideDialog();
-                            mRegisterView.onRegisterFailed(e.toString());
+                            if(e.getErrorCode()== EMError.USER_ALREADY_EXIST){
+                                mRegisterView.onRegisterFailed("用户已存在");
+                            }else{
+                                mRegisterView.onRegisterFailed(e.toString());
+                            }
                         }
                     });
                 }

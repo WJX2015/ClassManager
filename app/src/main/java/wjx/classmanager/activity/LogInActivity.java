@@ -96,6 +96,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
      */
     public boolean isFirstLogin(){
         if(SPUtil.getFirstRunTag(mContext)){
+            SPUtil.addFirstRunTag(mContext,false);
             return true;
         }
         return false;

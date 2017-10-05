@@ -2,12 +2,14 @@ package wjx.classmanager.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -121,5 +123,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void postDelay(Runnable runnable, long delayMillis) {
         mHandler.postDelayed(runnable, delayMillis);
+    }
+
+    protected void showAlertDialog(String title,String content,DialogInterface.OnClickListener listener){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(content);
+        builder.setPositiveButton("确定",listener);
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }

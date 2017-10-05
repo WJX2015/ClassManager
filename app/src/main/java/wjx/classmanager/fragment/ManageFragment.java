@@ -25,9 +25,9 @@ public class ManageFragment extends BaseFragment {
     private String[] mFunctionTitle={"发布通知","公布成绩","资料收集","活动投票",
             "推优评优","班级管理","班级考勤","更多管理"};
 
-    private int[] mFunctionIcon={R.drawable.title_bar_add,R.drawable.title_bar_icon,
-            R.drawable.title_bar_search,R.drawable.title_bar_add,R.drawable.title_bar_icon,
-            R.drawable.title_bar_search,R.drawable.title_bar_add,R.drawable.title_bar_icon
+    private int[] mFunctionIcon={R.drawable.manage_publish,R.drawable.manage_score,
+            R.drawable.manage_collect,R.drawable.manage_vote,R.drawable.manage_evaluate,
+            R.drawable.manage_class,R.drawable.manage_work,R.drawable.manage_more
     };
 
     private List<Manage> mManages= new ArrayList<>();

@@ -60,7 +60,6 @@
         <activity android:name=".activity.MyClassActivity">
         </activity>
         <activity android:name=".activity.NavigationActivity">
-
         </activity>
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
@@ -72,6 +71,14 @@
         <activity android:name=".activity.LogInActivity">
         </activity>
         <activity android:name=".activity.CreateClassActivity">
+        </activity>
+        <activity android:name=".activity.EvaluateActivity">
+        </activity>
+        <activity android:name=".activity.VoteActivity">
+        </activity>
+        <activity android:name=".activity.PostDataActivity">
+        </activity>
+        <activity android:name=".activity.PerosonalActivity">
         </activity>
     </application>
 

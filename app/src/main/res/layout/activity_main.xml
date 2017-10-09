@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wjx.classmanager.activity.MainActivity">
+    tools:context="wjx.classmanager.ui.activity.MainActivity">
 
     <wjx.classmanager.widget.SlideMenu
         android:id="@+id/slide_menu"

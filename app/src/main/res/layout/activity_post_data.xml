@@ -5,6 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wjx.classmanager.activity.PostDataActivity">
+    tools:context="wjx.classmanager.ui.activity.PostDataActivity">
 
 </android.support.constraint.ConstraintLayout>

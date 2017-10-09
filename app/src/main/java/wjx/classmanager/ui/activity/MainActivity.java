@@ -1,4 +1,4 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import android.content.DialogInterface;
 import android.support.annotation.IdRes;
@@ -12,11 +12,10 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import wjx.classmanager.R;
-import wjx.classmanager.fragment.FragmentFactory;
-import wjx.classmanager.fragment.ManageFragment;
-import wjx.classmanager.fragment.MessageFragment;
-import wjx.classmanager.fragment.NotifyFragment;
-import wjx.classmanager.presenter.MainPresenter;
+import wjx.classmanager.ui.fragment.FragmentFactory;
+import wjx.classmanager.ui.fragment.ManageFragment;
+import wjx.classmanager.ui.fragment.MessageFragment;
+import wjx.classmanager.ui.fragment.NotifyFragment;
 import wjx.classmanager.presenter.impl.MainPresenterImpl;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.SlideMenu;
@@ -99,7 +98,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,M
         //默认显示消息界面
         showFragment(FRAGMENT_MSG);
 
-        mMainPresenter = new MainPresenterImpl(this);
+        mMainPresenter = new MainPresenterImpl(this,this);
     }
 
     @Override
@@ -176,13 +175,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,M
                 mMainPresenter.personalInfo();
                 break;
             case R.id.left_unsign:
-                showAlertDialog("退出登录", "确定退出？", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mMainPresenter.unSign();
-                    }
-                });
-                Log.e("==========","点击退出登录");
+                mMainPresenter.unSign();
                 break;
         }
     }

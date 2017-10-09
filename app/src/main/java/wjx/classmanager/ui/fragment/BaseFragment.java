@@ -1,4 +1,4 @@
-package wjx.classmanager.fragment;
+package wjx.classmanager.ui.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;

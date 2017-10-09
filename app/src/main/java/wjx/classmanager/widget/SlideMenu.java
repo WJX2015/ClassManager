@@ -17,6 +17,8 @@ import com.nineoldandroids.view.ViewHelper;
 
 import wjx.classmanager.R;
 
+import static com.hyphenate.chat.a.a.a.i;
+
 /**
  * Created by wjx on 2017/7/2.
  */
@@ -218,8 +220,11 @@ public class SlideMenu extends HorizontalScrollView {
     }
 
     @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
-        return super.onInterceptHoverEvent(event);
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if(isOpen && ev.getX()-mMenuWidth>0){
+            return true;
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override

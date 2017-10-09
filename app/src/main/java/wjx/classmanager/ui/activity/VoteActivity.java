@@ -1,7 +1,4 @@
-package wjx.classmanager.activity;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+package wjx.classmanager.ui.activity;
 
 import wjx.classmanager.R;
 

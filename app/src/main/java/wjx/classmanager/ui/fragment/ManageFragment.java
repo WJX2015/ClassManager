@@ -1,8 +1,7 @@
-package wjx.classmanager.fragment;
+package wjx.classmanager.ui.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.EditText;

@@ -1,11 +1,8 @@
-package wjx.classmanager.activity;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+package wjx.classmanager.ui.activity;
 
 import wjx.classmanager.R;
 
-public class PostDataActivity extends BaseActivity {
+public class EvaluateActivity extends BaseActivity {
 
     @Override
     public void initView() {
@@ -24,6 +21,6 @@ public class PostDataActivity extends BaseActivity {
 
     @Override
     public int getLayout() {
-        return R.layout.activity_post_data;
+        return R.layout.activity_evaluate;
     }
 }

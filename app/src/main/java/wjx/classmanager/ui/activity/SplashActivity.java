@@ -1,17 +1,12 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.widget.ImageView;
 
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.impl.SplashPresentImpl;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.SplashView;
-import wjx.classmanager.widget.ManageItemView;
 
 public class SplashActivity extends BaseActivity implements SplashView{
 

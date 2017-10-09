@@ -1,4 +1,4 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;

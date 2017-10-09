@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import wjx.classmanager.R;
-import wjx.classmanager.activity.CreateClassActivity;
+import wjx.classmanager.ui.activity.CreateClassActivity;
 
 /**
  * Created by wjx on 2017/9/16.

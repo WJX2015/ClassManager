@@ -18,7 +18,6 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import wjx.classmanager.model.ClassUser;
 import wjx.classmanager.model.Constant;
 import wjx.classmanager.presenter.RegisterPresenter;
 import wjx.classmanager.utils.ThreadUtil;

@@ -1,4 +1,4 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -123,19 +123,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void postDelay(Runnable runnable, long delayMillis) {
         mHandler.postDelayed(runnable, delayMillis);
-    }
-
-    protected void showAlertDialog(String title,String content,DialogInterface.OnClickListener listener){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title);
-        builder.setMessage(content);
-        builder.setPositiveButton("确定",listener);
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.show();
     }
 }

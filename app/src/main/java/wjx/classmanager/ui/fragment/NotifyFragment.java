@@ -1,4 +1,4 @@
-package wjx.classmanager.fragment;
+package wjx.classmanager.ui.fragment;
 
 import wjx.classmanager.R;
 

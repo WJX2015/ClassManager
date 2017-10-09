@@ -1,4 +1,4 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import wjx.classmanager.R;
 

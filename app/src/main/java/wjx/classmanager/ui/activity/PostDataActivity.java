@@ -1,8 +1,8 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import wjx.classmanager.R;
 
-public class EvaluateActivity extends BaseActivity {
+public class PostDataActivity extends BaseActivity {
 
     @Override
     public void initView() {
@@ -21,6 +21,6 @@ public class EvaluateActivity extends BaseActivity {
 
     @Override
     public int getLayout() {
-        return R.layout.activity_evaluate;
+        return R.layout.activity_post_data;
     }
 }

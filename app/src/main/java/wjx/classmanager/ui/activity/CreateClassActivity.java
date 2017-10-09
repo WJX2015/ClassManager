@@ -1,4 +1,4 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import android.view.View;
 import android.widget.Button;

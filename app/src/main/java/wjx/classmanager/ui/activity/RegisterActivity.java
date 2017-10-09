@@ -1,4 +1,4 @@
-package wjx.classmanager.activity;
+package wjx.classmanager.ui.activity;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;

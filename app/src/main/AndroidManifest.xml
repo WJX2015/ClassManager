@@ -53,32 +53,32 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
         </activity>
-        <activity android:name=".activity.RegisterActivity">
+        <activity android:name=".ui.activity.RegisterActivity">
         </activity>
-        <activity android:name=".activity.MyClassActivity">
+        <activity android:name=".ui.activity.MyClassActivity">
         </activity>
-        <activity android:name=".activity.NavigationActivity">
+        <activity android:name=".ui.activity.NavigationActivity">
         </activity>
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LogInActivity">
+        <activity android:name=".ui.activity.LogInActivity">
         </activity>
-        <activity android:name=".activity.CreateClassActivity">
+        <activity android:name=".ui.activity.CreateClassActivity">
         </activity>
-        <activity android:name=".activity.EvaluateActivity">
+        <activity android:name=".ui.activity.EvaluateActivity">
         </activity>
-        <activity android:name=".activity.VoteActivity">
+        <activity android:name=".ui.activity.VoteActivity">
         </activity>
-        <activity android:name=".activity.PostDataActivity">
+        <activity android:name=".ui.activity.PostDataActivity">
         </activity>
-        <activity android:name=".activity.PerosonalActivity">
+        <activity android:name=".ui.activity.PerosonalActivity">
         </activity>
     </application>
 

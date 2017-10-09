@@ -1,25 +1,31 @@
 package wjx.classmanager.ui.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.MessageAdapter;
+import wjx.classmanager.application.MyApplication;
 import wjx.classmanager.model.Message;
+import wjx.classmanager.presenter.impl.MessagePresenterImpl;
+import wjx.classmanager.view.MessageView;
+import wjx.classmanager.widget.MessageItemView;
 
 /**
  * Created by wjx on 2017/9/16.
  */
 
-public class MessageFragment extends BaseFragment{
+public class MessageFragment extends BaseFragment implements MessageView{
 
     private RecyclerView mRecyclerView;
     private MessageAdapter mMessageAdapter;
-
-    private List<Message> mMessages = new ArrayList<>();
+    private MessagePresenterImpl mMessagePresenter;
 
     @Override
     protected void initListener() {
@@ -28,22 +34,12 @@ public class MessageFragment extends BaseFragment{
 
     @Override
     protected void initView() {
+        mMessagePresenter = new MessagePresenterImpl(this);
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_msg);
-        mMessageAdapter = new MessageAdapter(mMessages);
+        mMessageAdapter = new MessageAdapter(mMessagePresenter.getMessageList());
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         mRecyclerView.setAdapter(mMessageAdapter);
         mRecyclerView.setLayoutManager(manager);
-    }
-
-    @Override
-    protected void initData() {
-        for(int i=0;i<10;i++){
-            Message message=new Message();
-            message.setIcon(R.drawable.title_bar_icon);
-            message.setTitle("标题");
-            message.setTime("2017-10-03"+"  ,"+i);
-            mMessages.add(message);
-        }
     }
 
     @Override

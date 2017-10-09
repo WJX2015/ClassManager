@@ -14,25 +14,18 @@ import java.util.regex.Pattern;
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.ManageAdapter;
 import wjx.classmanager.model.Manage;
+import wjx.classmanager.presenter.impl.ManagePresenterImpl;
+import wjx.classmanager.view.ManageView;
 
 /**
  * Created by wjx on 2017/9/16.
  */
 
-public class ManageFragment extends BaseFragment {
-
-    private String[] mFunctionTitle={"发布通知","公布成绩","资料收集","活动投票",
-            "推优评优","班级管理","班级考勤","更多管理"};
-
-    private int[] mFunctionIcon={R.drawable.manage_publish,R.drawable.manage_score,
-            R.drawable.manage_collect,R.drawable.manage_vote,R.drawable.manage_evaluate,
-            R.drawable.manage_class,R.drawable.manage_work,R.drawable.manage_more
-    };
-
-    private List<Manage> mManages= new ArrayList<>();
+public class ManageFragment extends BaseFragment implements ManageView{
 
     private RecyclerView mRecyclerView;
     private ManageAdapter mManageAdapter;
+    private ManagePresenterImpl mManagePresenter;
 
     @Override
     protected void initListener() {
@@ -41,18 +34,12 @@ public class ManageFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        mManagePresenter = new ManagePresenterImpl(this);
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_manage);
-        mManageAdapter =new ManageAdapter(mManages);
+        mManageAdapter =new ManageAdapter(mManagePresenter.getManageList());
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mManageAdapter);
-    }
-
-    @Override
-    protected void initData() {
-        for(int i=0;i<mFunctionTitle.length;i++){
-            mManages.add(new Manage(mFunctionIcon[i],mFunctionTitle[i]));
-        }
     }
 
     @Override
@@ -60,35 +47,4 @@ public class ManageFragment extends BaseFragment {
         return R.layout.fragment_manage;
     }
 
-    /**
-     * 禁止输入空格
-     * @param editText
-     */
-    public void setEditTextInhibitInputSpace(EditText editText){
-        InputFilter filter=new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                if(source.equals(" "))return "";
-                else return null;
-            }
-        };
-        editText.setFilters(new InputFilter[]{filter});
-    }
-
-    /**
-     * 禁止输入特殊符号
-     * @param editText
-     */
-    public void setEditTextInhibitInputSpeChat(EditText editText) {
-        InputFilter filter = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                String speChat = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
-                Pattern pattern = Pattern.compile(speChat);
-                Matcher matcher = pattern.matcher(source.toString());
-                if (matcher.find()) return "";
-                else return null;
-            }
-        };
-    }
 }

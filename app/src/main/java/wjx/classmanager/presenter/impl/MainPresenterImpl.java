@@ -8,6 +8,7 @@ import com.hyphenate.chat.EMClient;
 
 import cn.bmob.v3.BmobUser;
 import wjx.classmanager.R;
+import wjx.classmanager.adapter.MessageAdapter;
 import wjx.classmanager.presenter.MainPresenter;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.ExitDialog;
@@ -16,7 +17,7 @@ import wjx.classmanager.widget.ExitDialog;
  * Created by wjx on 2017/10/5.
  */
 
-public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveButtonClickListener {
+public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveButtonClickListener{
 
     private MainView mMainView;
     private Context mContext;

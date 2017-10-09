@@ -23,7 +23,7 @@ import wjx.classmanager.ui.activity.CreateClassActivity;
  * Created by wjx on 2017/9/16.
  */
 
-public class TitleBar extends RelativeLayout implements View.OnClickListener{
+public class TitleBar extends RelativeLayout implements View.OnClickListener,PopupMenu.OnMenuItemClickListener{
 
     private String mTitle="班圈";
 
@@ -69,23 +69,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener{
         mTextView = (TextView) findViewById(R.id.title_text);
         mTextView.setText(mTitle);
         mMenu = new PopupMenu(getContext(),mImageView);
-        mMenu.getMenuInflater().inflate(R.menu.popup_menu,mMenu.getMenu());
-        mMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.menu_create:
-                        Intent intent=new Intent(getContext(), CreateClassActivity.class);
-                        getContext().startActivity(intent);
-                        break;
-                    case R.id.menu_join:
-                        break;
-                    case R.id.menu_scan:
-                        break;
-                }
-                return true;
-            }
-        });
+        mMenu.getMenuInflater().inflate(R.menu.title_bar_menu,mMenu.getMenu());
+        mMenu.setOnMenuItemClickListener(this);
 
         try {   //通过反射显示菜单图标
             Field field=mMenu.getClass().getDeclaredField("mPopup");
@@ -123,5 +108,20 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener{
      */
     public void setSlideMenu(SlideMenu slideMenu){
         mSlideMenu=slideMenu;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_create:
+                Intent intent=new Intent(getContext(), CreateClassActivity.class);
+                getContext().startActivity(intent);
+                break;
+            case R.id.menu_join:
+                break;
+            case R.id.menu_scan:
+                break;
+        }
+        return true;
     }
 }

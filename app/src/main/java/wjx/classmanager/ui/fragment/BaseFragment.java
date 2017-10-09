@@ -30,7 +30,6 @@ public abstract class BaseFragment extends Fragment {
         if (mView == null) {
             mView = inflater.inflate(getLayoutResourceId(), container, false);
             mContext = MyApplication.getMyContext();
-            initData();
             initView();
             initListener();
         }
@@ -40,8 +39,6 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initListener();
 
     protected abstract void initView();
-
-    protected abstract void initData();
 
     public abstract int getLayoutResourceId();
 

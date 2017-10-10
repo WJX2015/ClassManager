@@ -1,6 +1,8 @@
 package wjx.classmanager.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +16,12 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.hyphenate.util.NetUtils;
+
+import java.util.List;
 
 import wjx.classlibrary.zxing.CustomScanActivity;
 import wjx.classmanager.R;
@@ -65,6 +71,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void initView() {
+        immersive();
+
         //控件绑定
         mSlideMenu = (SlideMenu) findViewById(R.id.slide_menu);
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
@@ -109,6 +117,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMainPresenter = new MainPresenterImpl(this, this);
 
         EMClient.getInstance().addConnectionListener(mEMConnectionListener);
+        EMClient.getInstance().chatManager().addMessageListener(mEMMessageListener);
     }
 
     @Override
@@ -167,6 +176,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mTransaction.commit();
     }
 
+    /**
+     * 沉浸式效果
+     */
+    public void immersive() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -193,8 +214,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void logoutSuccess() {
+        ActivityCollector.finishAll();
         startActivity(LogInActivity.class);
-        finish();
     }
 
     @Override
@@ -218,6 +239,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().removeConnectionListener(mEMConnectionListener);
+        EMClient.getInstance().chatManager().removeMessageListener(mEMMessageListener);
     }
 
     /**
@@ -245,13 +267,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             break;
                         default:
                             if (NetUtils.hasNetwork(MainActivity.this)) {
-                                showToast("连接不到聊天服务器");
+                                showToast("网络状况不佳，连接不到服务器");
                             } else {
                                 showToast("当前网络不可用，请检查网络设置");
                             }
                     }
                 }
             });
+        }
+    };
+
+    private EMMessageListener mEMMessageListener = new EMMessageListener() {
+        @Override
+        public void onMessageReceived(List<EMMessage> list) { //收到消息
+
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> list) { //收到透传消息
+
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> list) { //收到已读回执
+
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> list) { //收到已送达回执
+
+        }
+
+        @Override
+        public void onMessageRecalled(List<EMMessage> list) { //消息被撤回
+
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage emMessage, Object o) { //消息状态变动
+
         }
     };
 }

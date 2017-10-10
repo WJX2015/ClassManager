@@ -3,6 +3,8 @@ package wjx.classmanager.ui.activity;
 import android.content.Intent;
 import android.widget.ImageView;
 
+import com.hyphenate.chat.EMClient;
+
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.impl.SplashPresentImpl;
 import wjx.classmanager.utils.ThreadUtil;
@@ -10,6 +12,7 @@ import wjx.classmanager.view.SplashView;
 
 public class SplashActivity extends BaseActivity implements SplashView{
 
+    private static final int SLEEP_TIME=3000;
     private SplashPresentImpl mSplashPresent;
     private ImageView mImageView;
 
@@ -24,7 +27,13 @@ public class SplashActivity extends BaseActivity implements SplashView{
             @Override
             public void run() {
                 try{
-                    Thread.sleep(3000);
+                    long start = System.currentTimeMillis();
+                    EMClient.getInstance().chatManager().loadAllConversations();
+                    EMClient.getInstance().groupManager().loadAllGroups();
+                    long costTime = System.currentTimeMillis() - start;
+                    if(SLEEP_TIME-costTime>0){
+                        Thread.sleep(SLEEP_TIME-costTime);
+                    }
                     mSplashPresent.checkLogInStatus();
                 }catch (Exception e){
                     e.printStackTrace();

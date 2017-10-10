@@ -47,7 +47,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         holder.mMessageItemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                showPopupMenu(holder.mMessageItemView);
+                showPopupMenu(holder.mMessageItemView,position);
                 return true;
             }
         });
@@ -70,13 +70,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
     }
 
-
     /**
      * 新增一条消息
      *
      * @param message
      */
-    public void addMessage(Message message) {
+    public void addMessageItem(Message message) {
         if (checkMessageType(message.getType())) {
             mMessages.remove(mMessagePosition);
         }
@@ -106,7 +105,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
      *
      * @param messageItemView
      */
-    private void showPopupMenu(MessageItemView messageItemView) {
+    private void showPopupMenu(MessageItemView messageItemView, final int position) {
         PopupMenu menu = new PopupMenu(mContext, messageItemView);
         menu.getMenuInflater().inflate(R.menu.msg_item_menu, menu.getMenu());
         menu.setGravity(Gravity.END);
@@ -117,8 +116,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     case R.id.msg_unread:
                         break;
                     case R.id.msg_top:
+                        updateMessageItem(position);
                         break;
                     case R.id.msg_delete:
+                        deleteMessageItem(position);
                         break;
                 }
                 return true;
@@ -136,6 +137,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         Message message = mMessages.get(position);
         mMessages.remove(position);
         mMessages.add(0, message);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 删除一条消息
+     * @param position
+     */
+    private void deleteMessageItem(int position){
+        mMessages.remove(position);
         notifyDataSetChanged();
     }
 }

@@ -1,11 +1,13 @@
 package wjx.classmanager.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.PopupMenu;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +15,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+
 import java.lang.reflect.Field;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import wjx.classlibrary.zxing.CustomScanActivity;
 import wjx.classmanager.R;
 import wjx.classmanager.ui.activity.CreateClassActivity;
+import wjx.classmanager.ui.activity.MainActivity;
 
 /**
  * Created by wjx on 2017/9/16.
@@ -120,8 +126,23 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
             case R.id.menu_join:
                 break;
             case R.id.menu_scan:
+                if(mOnScanClickListener!=null){
+                    mOnScanClickListener.onScanClick();
+                }
+                Log.e( "onMenuItemClick: ", "+++++++");
+
                 break;
         }
         return true;
+    }
+
+    private onScanClickListener mOnScanClickListener;
+
+    public interface onScanClickListener{
+        void onScanClick();
+    }
+
+    public void setOnScanClickListener(onScanClickListener onScanClickListener){
+        mOnScanClickListener=onScanClickListener;
     }
 }

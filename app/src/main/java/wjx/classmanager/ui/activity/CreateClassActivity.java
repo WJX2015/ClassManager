@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import wjx.classlibrary.EaseAlertDialog;
+import wjx.classlibrary.ease.EaseAlertDialog;
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.presenter.impl.CreateClassPresenterImpl;

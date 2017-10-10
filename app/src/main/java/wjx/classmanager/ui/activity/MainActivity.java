@@ -1,16 +1,19 @@
 package wjx.classmanager.ui.activity;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import wjx.classlibrary.zxing.CustomScanActivity;
 import wjx.classmanager.R;
 import wjx.classmanager.ui.fragment.FragmentFactory;
 import wjx.classmanager.ui.fragment.ManageFragment;
@@ -29,7 +32,7 @@ import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MANAGE;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MSG;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_NOTIFY;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,MainView {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainView, TitleBar.onScanClickListener {
 
     private SlideMenu mSlideMenu;
     private TitleBar mTitleBar;
@@ -98,7 +101,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,M
         //默认显示消息界面
         showFragment(FRAGMENT_MSG);
 
-        mMainPresenter = new MainPresenterImpl(this,this);
+        mMainPresenter = new MainPresenterImpl(this, this);
     }
 
     @Override
@@ -131,6 +134,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,M
     @Override
     public void initData() {
         mTitleBar.setSlideMenu(mSlideMenu);
+        mTitleBar.setOnScanClickListener(this);
     }
 
     @Override
@@ -184,5 +188,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,M
     public void logoutSuccess() {
         startActivity(LogInActivity.class);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null && intentResult.getContents() != null) {
+            String ScanResult = intentResult.getContents();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onScanClick() {
+        new IntentIntegrator(MainActivity.this)
+                .setOrientationLocked(false)
+                .setCaptureActivity(CustomScanActivity.class)
+                .initiateScan();
     }
 }

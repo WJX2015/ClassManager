@@ -72,11 +72,10 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
         hideProgress();
         showToast("登录成功");
         if(isFirstLogin()){
-            startActivity(NavigationActivity.class);
+            startActivity(NavigationActivity.class,true);
         }else{
-            startActivity(MainActivity.class);
+            startActivity(MainActivity.class,true);
         }
-        finish();
     }
 
     @Override

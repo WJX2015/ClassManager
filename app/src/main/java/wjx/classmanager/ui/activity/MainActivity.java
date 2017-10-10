@@ -12,14 +12,20 @@ import android.widget.RelativeLayout;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.util.NetUtils;
 
 import wjx.classlibrary.zxing.CustomScanActivity;
 import wjx.classmanager.R;
+import wjx.classmanager.collector.ActivityCollector;
 import wjx.classmanager.ui.fragment.FragmentFactory;
 import wjx.classmanager.ui.fragment.ManageFragment;
 import wjx.classmanager.ui.fragment.MessageFragment;
 import wjx.classmanager.ui.fragment.NotifyFragment;
 import wjx.classmanager.presenter.impl.MainPresenterImpl;
+import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.SlideMenu;
 import wjx.classmanager.widget.TitleBar;
@@ -100,8 +106,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         //默认显示消息界面
         showFragment(FRAGMENT_MSG);
-
         mMainPresenter = new MainPresenterImpl(this, this);
+
+        EMClient.getInstance().addConnectionListener(mEMConnectionListener);
     }
 
     @Override
@@ -206,4 +213,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 .setCaptureActivity(CustomScanActivity.class)
                 .initiateScan();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EMClient.getInstance().removeConnectionListener(mEMConnectionListener);
+    }
+
+    /**
+     * 环信连接状态监听
+     */
+    private EMConnectionListener mEMConnectionListener = new EMConnectionListener() {
+        @Override
+        public void onConnected() {
+
+        }
+
+        @Override
+        public void onDisconnected(final int error) {
+            ThreadUtil.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    switch (error) {
+                        case EMError.USER_LOGIN_ANOTHER_DEVICE:
+                            ActivityCollector.finishAll();
+                            startActivity(LogInActivity.class);
+                            showToast("异地登录");
+                            break;
+                        case EMError.USER_REMOVED:
+                            showToast("用户被移除");
+                            break;
+                        default:
+                            if (NetUtils.hasNetwork(MainActivity.this)) {
+                                showToast("连接不到聊天服务器");
+                            } else {
+                                showToast("当前网络不可用，请检查网络设置");
+                            }
+                    }
+                }
+            });
+        }
+    };
 }

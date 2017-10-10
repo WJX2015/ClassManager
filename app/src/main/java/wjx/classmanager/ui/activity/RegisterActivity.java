@@ -22,7 +22,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText mPhone;    //手机号
     private EditText mCode;     //验证码
     private Button mGetCode;    //获取验证码
-    private Button mSign;       //登录
+    private Button mSign;       //注册
 
     private TextInputLayout mInputPhone;
     private TextInputLayout mInputCode;

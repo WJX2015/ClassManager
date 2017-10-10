@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import wjx.classmanager.application.MyApplication;
+import wjx.classmanager.collector.ActivityCollector;
 
 import static java.security.AccessController.getContext;
 
@@ -36,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         mContext = MyApplication.getMyContext();
+        ActivityCollector.addActivity(this);
 
         //沉浸式效果
         if (Build.VERSION.SDK_INT >= 21) {
@@ -123,5 +125,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void postDelay(Runnable runnable, long delayMillis) {
         mHandler.postDelayed(runnable, delayMillis);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

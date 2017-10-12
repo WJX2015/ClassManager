@@ -29,7 +29,7 @@ import wjx.classmanager.collector.ActivityCollector;
 import wjx.classmanager.ui.fragment.FragmentFactory;
 import wjx.classmanager.ui.fragment.ManageFragment;
 import wjx.classmanager.ui.fragment.MessageFragment;
-import wjx.classmanager.ui.fragment.NotifyFragment;
+import wjx.classmanager.ui.fragment.MemberFragment;
 import wjx.classmanager.presenter.impl.MainPresenterImpl;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MainView;
@@ -103,13 +103,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         //创建Fragment
         MessageFragment messageFragment = (MessageFragment) FragmentFactory.getFragment(CREATE_MESSAGE);
-        NotifyFragment notifyFragment = (NotifyFragment) FragmentFactory.getFragment(CREATE_NOTIFY);
+        MemberFragment memberFragment = (MemberFragment) FragmentFactory.getFragment(CREATE_NOTIFY);
         ManageFragment manageFragment = (ManageFragment) FragmentFactory.getFragment(CREATE_MANAGE);
 
         //管理Fragment
         mFragments = new Fragment[FRAGMENT_COUNT];
         mFragments[0] = messageFragment;
-        mFragments[1] = notifyFragment;
+        mFragments[1] = memberFragment;
         mFragments[2] = manageFragment;
 
         //默认显示消息界面

@@ -130,11 +130,9 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
             case R.id.menu_join:
                 break;
             case R.id.menu_scan:
-                if(mOnScanClickListener!=null){
+                if(mOnScanClickListener!=null) {
                     mOnScanClickListener.onScanClick();
                 }
-                Log.e( "onMenuItemClick: ", "+++++++");
-
                 break;
         }
         return true;

@@ -22,7 +22,7 @@ public class FragmentFactory {
             case CREATE_MESSAGE:
                 return new MessageFragment();
             case CREATE_NOTIFY:
-                return new NotifyFragment();
+                return new MemberFragment();
         }
         return null;
     }

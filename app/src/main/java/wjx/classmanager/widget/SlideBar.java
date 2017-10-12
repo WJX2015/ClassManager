@@ -71,7 +71,7 @@ public class SlideBar extends View {
                 notifySectionChange(event);
                 break;
             case MotionEvent.ACTION_UP:
-                setBackgroundColor(Color.TRANSPARENT);
+                setBackgroundColor(getResources().getColor(R.color.bg_gray));
                 if (mOnSlideBarChangeListener != null) {
                     mOnSlideBarChangeListener.onSlidingFinish();
                 }

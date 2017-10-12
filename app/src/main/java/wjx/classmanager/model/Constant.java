@@ -32,6 +32,9 @@ public class Constant { //常量类
         public static final int POST_DATA = 8;        //上传资料
         public static final int PERSON_INFO = 9;      //个人信息
         public static final int PHOTO_CLASS = 10;     //班级相册
+    }
 
+    public static class Receiver{
+        public static final String ACTION ="receiver_action";
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.PopupMenu;
 import android.util.AttributeSet;
@@ -22,6 +23,7 @@ import java.lang.reflect.Field;
 import de.hdodenhof.circleimageview.CircleImageView;
 import wjx.classlibrary.zxing.CustomScanActivity;
 import wjx.classmanager.R;
+import wjx.classmanager.model.Constant;
 import wjx.classmanager.ui.activity.CreateClassActivity;
 import wjx.classmanager.ui.activity.MainActivity;
 
@@ -103,6 +105,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
                 mSlideMenu.toggleMenu();
                 break;
             case R.id.title_add:
+                Intent intent = new Intent(Constant.Receiver.ACTION);
+                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                 mMenu.show();
                 break;
         }

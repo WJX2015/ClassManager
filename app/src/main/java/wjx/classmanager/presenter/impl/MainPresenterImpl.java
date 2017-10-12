@@ -79,6 +79,7 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
             @Override
             public void onError(int code, String message) {
                 Log.e("========","环信退出登录失败");
+                mMainView.logoutFailed();
             }
         });
     }
@@ -92,8 +93,9 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
 
     @Override
     public void onPositiveButtonClick(ExitDialog exitDialog) {
+        exitDialog.dismiss();
+        mMainView.onStartLogout();
         unsignBmob();
         unsignHuanxin();
-        exitDialog.dismiss();
     }
 }

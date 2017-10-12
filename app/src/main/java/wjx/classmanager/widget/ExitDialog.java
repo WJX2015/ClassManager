@@ -17,8 +17,7 @@ import wjx.classmanager.R;
  */
 
 public class ExitDialog extends AlertDialog implements View.OnClickListener{
-
-    private TextView mContentText;
+    public TextView mContentText;
     private Button mPositiveButton;
     private Button mNegativeButton;
 
@@ -41,6 +40,7 @@ public class ExitDialog extends AlertDialog implements View.OnClickListener{
     }
 
     private void initView() {
+
         mContentText = (TextView) findViewById(R.id.dialog_content);
         mPositiveButton = (Button)findViewById(R.id.dialog_positive_btn);
         mNegativeButton = (Button)findViewById(R.id.dialog_negative_btn);

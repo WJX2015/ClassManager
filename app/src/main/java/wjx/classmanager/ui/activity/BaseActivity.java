@@ -122,6 +122,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mToast = null;
+        mProgressDialog = null;
         ActivityCollector.removeActivity(this);
     }
 }

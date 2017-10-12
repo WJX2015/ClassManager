@@ -1,21 +1,16 @@
 package wjx.classmanager.ui.fragment;
 
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
-import android.view.MenuItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.MessageAdapter;
-import wjx.classmanager.application.MyApplication;
-import wjx.classmanager.model.Message;
+import wjx.classmanager.model.Constant;
 import wjx.classmanager.presenter.impl.MessagePresenterImpl;
+import wjx.classmanager.receiver.MessageReceiver;
 import wjx.classmanager.view.MessageView;
-import wjx.classmanager.widget.MessageItemView;
 
 /**
  * Created by wjx on 2017/9/16.
@@ -26,6 +21,10 @@ public class MessageFragment extends BaseFragment implements MessageView{
     private RecyclerView mRecyclerView;
     private MessageAdapter mMessageAdapter;
     private MessagePresenterImpl mMessagePresenter;
+
+    private IntentFilter mIntentFilter;
+    private MessageReceiver mMessageReceiver;
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     @Override
     protected void initListener() {
@@ -40,10 +39,22 @@ public class MessageFragment extends BaseFragment implements MessageView{
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         mRecyclerView.setAdapter(mMessageAdapter);
         mRecyclerView.setLayoutManager(manager);
+
+        mIntentFilter=new IntentFilter();
+        mIntentFilter.addAction(Constant.Receiver.ACTION);
+        mMessageReceiver = new MessageReceiver();
+        mLocalBroadcastManager =LocalBroadcastManager.getInstance(mContext);
+        mLocalBroadcastManager.registerReceiver(mMessageReceiver,mIntentFilter);
     }
 
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_msg;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mLocalBroadcastManager.unregisterReceiver(mMessageReceiver);
     }
 }

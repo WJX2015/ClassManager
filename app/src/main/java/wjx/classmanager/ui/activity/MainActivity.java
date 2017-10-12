@@ -214,8 +214,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void logoutSuccess() {
-        ActivityCollector.finishAll();
-        startActivity(LogInActivity.class);
+        hideProgress();
+        startActivity(LogInActivity.class,true);
+    }
+
+    @Override
+    public void logoutFailed() {
+        hideProgress();
+        showToast("退出登录失败");
+    }
+
+    @Override
+    public void onStartLogout() {
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showProgress("正在退出登录...");
+            }
+        });
     }
 
     @Override
@@ -260,7 +276,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         case EMError.USER_LOGIN_ANOTHER_DEVICE:
                             ActivityCollector.finishAll();
                             startActivity(LogInActivity.class);
-                            showToast("异地登录");
+                            showToast("账号异地登录");
                             break;
                         case EMError.USER_REMOVED:
                             showToast("用户被移除");

@@ -21,6 +21,7 @@ import wjx.classmanager.widget.MessageItemView;
  */
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
+
     private List<Message> mMessages;
     private int mMessagePosition;
     private Context mContext;

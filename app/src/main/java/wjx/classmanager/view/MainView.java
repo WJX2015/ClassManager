@@ -1,5 +1,7 @@
 package wjx.classmanager.view;
 
+import wjx.classmanager.widget.ExitDialog;
+
 /**
  * Created by wjx on 2017/10/5.
  */
@@ -7,5 +9,9 @@ package wjx.classmanager.view;
 public interface MainView {
 
     void logoutSuccess();
+
+    void logoutFailed();
+
+    void onStartLogout();
 
 }

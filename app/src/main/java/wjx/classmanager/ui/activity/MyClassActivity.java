@@ -133,9 +133,11 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             case R.id.ll_back:
                 finish();
                 break;
+            case R.id.rl_class_code:
+                startActivity(ClassCodeActivity.class);
+                break;
         }
     }
-
 
     private class AdminAdapter extends ArrayAdapter<String> {
         private int res;
@@ -143,11 +145,8 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
 
         public AdminAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects) {
             super(context, resource, objects);
-
             res=resource;
-
         }
-
 
         @NonNull
         @Override
@@ -221,10 +220,6 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             }
             return convertView;
         }
-
-
-
-
 
         /**
          * 判断当前用户是否群主
@@ -426,6 +421,13 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void initListener() {
         mLinearLayout_back.setOnClickListener(this);
+        mRelativeLayout_change_class_description.setOnClickListener(this);
+        mRelativeLayout_change_class_name.setOnClickListener(this);
+        mRelativeLayout_class_code.setOnClickListener(this);
+        mRelativeLayout_class_file.setOnClickListener(this);
+        mRelativeLayout_class_grade.setOnClickListener(this);
+        mRelativeLayout_class_notification.setOnClickListener(this);
+        mRelativeLayout_class_photo.setOnClickListener(this);
     }
 
     @Override

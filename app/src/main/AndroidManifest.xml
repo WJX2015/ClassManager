@@ -82,6 +82,8 @@
         </activity>
         <activity android:name="wjx.classlibrary.zxing.CustomScanActivity">
         </activity>
+        <activity android:name=".ui.activity.ClassCodeActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -27,4 +27,18 @@
     <string name="register_code">请输入验证码</string>
     <string name="register_getcode">获取验证码</string>
     <string name="register_sign">注  册</string>
+
+    <string name="location_recv">[%1$s location]</string>
+    <string name="location_message">The location information</string>
+    <string name="recording_video">Record video</string>
+    <string name="location_prefix">[my location]</string>
+    <string name="voice">Voice</string>
+    <string name="picture">[Picture]</string>
+    <string name="video">[Video]</string>
+    <string name="file">[file]</string>
+    <string name="dynamic_expression">[Dynamic expression]</string>
+    <string name="voice_prefix">[Voice]</string>
+    <string name="voice_call">[Voice call]</string>
+    <string name="video_call">[Video call]</string>
+    <string name="all_members">All members</string>
 </resources>

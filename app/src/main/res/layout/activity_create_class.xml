@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:background="#eee"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="#eee"
+              android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:background="@color/colorPrimary"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <LinearLayout
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
             android:id="@+id/back"
-            >
+            android:layout_width="45dp"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -24,7 +23,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="9dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/em_mm_title_back" />
+                android:src="@drawable/em_mm_title_back"/>
         </LinearLayout>
 
         <TextView
@@ -33,19 +32,16 @@
             android:layout_centerInParent="true"
             android:text="创建班级"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <Button
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/save_class"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:id="@+id/save_class"
-            android:background="@drawable/em_add"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:background="@drawable/title_bar_add"/>
     </RelativeLayout>
-
 
     <EditText
         android:id="@+id/edit_group_name"
@@ -54,9 +50,9 @@
         android:layout_margin="10dp"
         android:background="@drawable/em_button_normal_shape"
         android:hint="班级名称"
+        android:maxLines="1"
         android:paddingLeft="5dp"
-        android:singleLine="true"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/edit_group_introduction"
@@ -71,7 +67,7 @@
         android:lines="5"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
 
     <LinearLayout
@@ -82,23 +78,24 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/em_button_normal_shape"
         >
+
         <TextView
-            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
             android:text="是否公开"
             android:textColor="#333"
-            android:layout_gravity="center_vertical"
             android:textSize="18sp"
-            android:layout_weight="1"
             />
 
         <CheckBox
             android:id="@+id/cb_public"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
             android:layout_gravity="center_vertical"
+            android:layout_weight="0"
             android:button="@drawable/em_checkbox_bg_selector"
             />
 
@@ -113,24 +110,25 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/em_button_normal_shape"
         >
+
         <TextView
             android:id="@+id/second_desc"
-            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
             android:text="开放班级成员邀请"
             android:textColor="#333"
-            android:layout_gravity="center_vertical"
             android:textSize="18sp"
-            android:layout_weight="1"
             />
 
         <CheckBox
             android:id="@+id/cb_member_inviter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
             android:layout_gravity="center_vertical"
+            android:layout_weight="0"
             android:button="@drawable/em_checkbox_bg_selector"
             />
 

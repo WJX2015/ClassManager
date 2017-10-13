@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -71,7 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void initView() {
-        immersive();
+        immersive(); //沉浸式效果
 
         //控件绑定
         mSlideMenu = (SlideMenu) findViewById(R.id.slide_menu);
@@ -176,9 +177,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mTransaction.commit();
     }
 
-    /**
-     * 沉浸式效果
-     */
     public void immersive() {
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();

@@ -84,5 +84,4 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
             }
         });
     }
-
 }

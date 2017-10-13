@@ -8,11 +8,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMGroup;
+import com.hyphenate.exceptions.HyphenateException;
+
+import java.util.List;
+
 import wjx.classlibrary.ease.EaseAlertDialog;
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.presenter.impl.CreateClassPresenterImpl;
 import wjx.classmanager.view.CreateClassView;
+
+import static com.hyphenate.chat.a.a.a.f;
 
 public class CreateClassActivity extends BaseActivity implements CreateClassView, View.OnClickListener {
 
@@ -29,6 +37,7 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     private CheckBox mInviterBox;
 
     private CreateClassPresenter mCreateClassPresenter;
+    protected List<EMGroup> grouplist;
 
     @Override
     public void initView() {
@@ -87,7 +96,22 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     @Override
     public void onCreateSuccess() {
         hideProgress();
-        //startActivity(ClassDetailsActivity.class);
+        try {
+            grouplist = EMClient.getInstance().groupManager().getJoinedGroupsFromServer();
+        } catch (HyphenateException e) {
+            e.printStackTrace();
+        }
+        grouplist = EMClient.getInstance().groupManager().getAllGroups();
+        String className=mGroupNameEdit.getText().toString();
+
+        for (EMGroup group:grouplist){
+            if (group.getGroupName().equals(className)){
+                String groupId=group.getGroupId();
+                startActivity(MyClassActivity.class,"groupId",groupId);
+                finish();
+                break;
+            }
+        }
     }
 
     @Override

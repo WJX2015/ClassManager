@@ -36,8 +36,10 @@ import wjx.classmanager.presenter.impl.MyclassPresenterImpl;
 import wjx.classmanager.utils.EaseUserUtils;
 import wjx.classmanager.utils.ThreadUtil;
 
+import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 
-public class MyClassActivity extends BaseActivity {
+
+public class MyClassActivity extends BaseActivity implements View.OnClickListener{
 
     private final String TAG="MyClassActivity";
     private LinearLayout mLinearLayout_back;
@@ -66,7 +68,7 @@ public class MyClassActivity extends BaseActivity {
     private List<String> adminList = Collections.synchronizedList(new ArrayList<String>());
 
     private void init() {
-        groupId = getIntent().getStringExtra("groupId");
+        groupId = getIntent().getStringExtra(CLASS_GROUP_ID);
         group = EMClient.getInstance().groupManager().getGroup(groupId);
 
         if(group == null){
@@ -123,6 +125,15 @@ public class MyClassActivity extends BaseActivity {
 
         // 保证每次进详情看到的都是最新的group
         updateGroup();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_back:
+                finish();
+                break;
+        }
     }
 
 
@@ -209,7 +220,6 @@ public class MyClassActivity extends BaseActivity {
                 });
             }
             return convertView;
-
         }
 
 
@@ -324,7 +334,6 @@ public class MyClassActivity extends BaseActivity {
         };
     }
 
-
     private void updateGroup() {
 
         ThreadUtil.runOnBackgroundThread(new Runnable() {
@@ -416,7 +425,7 @@ public class MyClassActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mLinearLayout_back.setOnClickListener(this);
     }
 
     @Override
@@ -461,32 +470,32 @@ public class MyClassActivity extends BaseActivity {
             finish();
         }
 
-        //添加成员到禁言列表的通知
-        @Override
+
+        @Override  //添加成员到禁言列表的通知
         public void onMuteListAdded(String groupId, final List<String> mutes, final long muteExpire) {
             updateGroup();
         }
 
-        // 成员从禁言列表里移除通知
-        @Override
+
+        @Override  // 成员从禁言列表里移除通知
         public void onMuteListRemoved(String groupId, final List<String> mutes) {
             updateGroup();
         }
 
-        //增加管理员的通知
-        @Override
+
+        @Override  //增加管理员的通知
         public void onAdminAdded(String groupId, String administrator) {
             updateGroup();
         }
 
-        //管理员移除的通知
-        @Override
+
+        @Override //管理员移除的通知
         public void onAdminRemoved(String groupId, String administrator) {
             updateGroup();
         }
 
-        //群所有者变动通知
-        @Override
+
+        @Override //群所有者变动通知
         public void onOwnerChanged(String groupId, String newOwner, String oldOwner) {
 
 
@@ -499,22 +508,22 @@ public class MyClassActivity extends BaseActivity {
             updateGroup();
         }
 
-        //群组加入新成员通知
-        @Override
+
+        @Override  //群组加入新成员通知
         public void onMemberJoined(String groupId, String member) {
             EMLog.d(TAG, "onMemberJoined");
             updateGroup();
         }
 
-        //群成员退出通知
-        @Override
+
+        @Override  //群成员退出通知
         public void onMemberExited(String groupId, String member) {
             EMLog.d(TAG, "onMemberExited");
             updateGroup();
         }
 
-        //群公告变动通知
-        @Override
+
+        @Override  //群公告变动通知
         public void onAnnouncementChanged(String groupId, final String announcement) {
 //            if(groupId.equals(MyClassActivity.this.groupId)) {
 //                runOnUiThread(new Runnable() {
@@ -526,8 +535,7 @@ public class MyClassActivity extends BaseActivity {
 //            }
         }
 
-        //增加共享文件的通知
-        @Override
+        @Override  //增加共享文件的通知
         public void onSharedFileAdded(String groupId, final EMMucSharedFile sharedFile) {
             if(groupId.equals(MyClassActivity.this.groupId)) {
                 runOnUiThread(new Runnable() {
@@ -539,8 +547,7 @@ public class MyClassActivity extends BaseActivity {
             }
         }
 
-        //群共享文件删除通知
-        @Override
+        @Override  //群共享文件删除通知
         public void onSharedFileDeleted(String groupId, String fileId) {
             if(groupId.equals(MyClassActivity.this.groupId)) {
                 runOnUiThread(new Runnable() {

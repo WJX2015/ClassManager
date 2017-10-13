@@ -37,4 +37,8 @@ public class Constant { //常量类
     public static class Receiver{
         public static final String ACTION ="receiver_action";
     }
+
+    public static class MyClass{
+        public static final String CLASS_GROUP_ID="class_group_id";
+    }
 }

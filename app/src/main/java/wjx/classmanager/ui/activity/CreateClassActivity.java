@@ -20,7 +20,9 @@ import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.presenter.impl.CreateClassPresenterImpl;
 import wjx.classmanager.view.CreateClassView;
 
+import static android.provider.Contacts.GroupMembership.GROUP_ID;
 import static com.hyphenate.chat.a.a.a.f;
+import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 
 public class CreateClassActivity extends BaseActivity implements CreateClassView, View.OnClickListener {
 
@@ -38,6 +40,8 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
 
     private CreateClassPresenter mCreateClassPresenter;
     protected List<EMGroup> grouplist;
+
+    private static String mGroupId;
 
     @Override
     public void initView() {
@@ -106,12 +110,16 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
 
         for (EMGroup group:grouplist){
             if (group.getGroupName().equals(className)){
-                String groupId=group.getGroupId();
-                startActivity(MyClassActivity.class,"groupId",groupId);
+                mGroupId=group.getGroupId();
+                startActivity(MyClassActivity.class,CLASS_GROUP_ID,mGroupId);
                 finish();
                 break;
             }
         }
+    }
+
+    public static String getGroupId(){
+        return mGroupId;
     }
 
     @Override

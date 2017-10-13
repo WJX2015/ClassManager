@@ -44,6 +44,7 @@ import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_COUNT;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MANAGE;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MSG;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_NOTIFY;
+import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener, MainView, TitleBar.onScanClickListener {
 
@@ -230,6 +231,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 showProgress("正在退出登录...");
             }
         });
+    }
+
+    @Override
+    public void intentMyClass(String groupId) {
+        startActivity(MyClassActivity.class,CLASS_GROUP_ID,groupId);
     }
 
     @Override

@@ -14,4 +14,6 @@ public interface MainView {
 
     void onStartLogout();
 
+    void intentMyClass(String groupId);
+
 }

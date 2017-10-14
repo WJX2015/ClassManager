@@ -219,10 +219,26 @@ public class SlideMenu extends HorizontalScrollView {
         ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
     }
 
+    private int startX;
+    private int startY;
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if(isOpen && ev.getX()-mMenuWidth>0){
             return true;
+        }
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                startX = (int) ev.getX();
+                startY = (int) ev.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int dX= (int) (ev.getX()-startX);
+                int dY= (int) (ev.getY()-startY);
+                if(Math.abs(dX)/2<Math.abs(dY)){
+                    return false;
+                }
+                break;
         }
         return super.onInterceptTouchEvent(ev);
     }

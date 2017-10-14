@@ -55,7 +55,9 @@
 
         <activity android:name=".ui.activity.MainActivity">
         </activity>
-        <activity android:name=".ui.activity.RegisterActivity">
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".ui.activity.MyClassActivity">
         </activity>
@@ -68,7 +70,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.LogInActivity">
+        <activity
+            android:name=".ui.activity.LogInActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".ui.activity.CreateClassActivity">
         </activity>

@@ -1,16 +1,24 @@
 package wjx.classmanager.ui.activity;
 
+import android.graphics.Color;
+import android.os.Build;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import wjx.classmanager.R;
+import wjx.classmanager.listener.SoftkeyListener;
 import wjx.classmanager.presenter.impl.LoginPresenterImpl;
 import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.LogInView;
 
-public class LogInActivity extends BaseActivity implements View.OnClickListener,LogInView{
+public class LogInActivity extends BaseActivity implements View.OnClickListener, LogInView, SoftkeyListener.OnSoftKeyBoardChangeListener {
 
+    private RelativeLayout mRelativeLayout;
     private EditText mUsername;
     private EditText mPassword;
     private Button mRegister;
@@ -20,6 +28,8 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void initView() {
+        immersive();
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.log_relative);
         mUsername = (EditText) findViewById(R.id.log_name);
         mPassword = (EditText) findViewById(R.id.log_pass);
         mRegister = (Button) findViewById(R.id.log_register);
@@ -31,6 +41,8 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
     public void initListener() {
         mRegister.setOnClickListener(this);
         mLogin.setOnClickListener(this);
+        mPassword.setOnEditorActionListener(mOnEditorActionListener);
+        SoftkeyListener.setListener(this,this);
     }
 
     @Override
@@ -45,12 +57,12 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.log_register:
                 startActivity(RegisterActivity.class);
                 break;
             case R.id.log_in:
-                mLoginPresenter.login(mUsername.getText().toString(),mPassword.getText().toString());
+                mLoginPresenter.login(mUsername.getText().toString(), mPassword.getText().toString());
                 break;
         }
     }
@@ -71,10 +83,10 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
     public void onLoginSuccess() {
         hideProgress();
         showToast("登录成功");
-        if(isFirstLogin()){
-            startActivity(NavigationActivity.class,true);
-        }else{
-            startActivity(MainActivity.class,true);
+        if (isFirstLogin()) {
+            startActivity(NavigationActivity.class, true);
+        } else {
+            startActivity(MainActivity.class, true);
         }
     }
 
@@ -89,15 +101,47 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
         showProgress("登录中...");
     }
 
+    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                mLoginPresenter.login(mUsername.getText().toString(), mPassword.getText().toString());
+            }
+            return true;
+        }
+    };
+
     /**
      * 判断用户是否第一次启动应用
+     *
      * @return
      */
-    public boolean isFirstLogin(){
-        if(SPUtil.getFirstRunTag(mContext)){
-            SPUtil.addFirstRunTag(mContext,false);
+    public boolean isFirstLogin() {
+        if (SPUtil.getFirstRunTag(mContext)) {
+            SPUtil.addFirstRunTag(mContext, false);
             return true;
         }
         return false;
+    }
+
+    public void immersive() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    @Override
+    public void keyBoardShow(int height) {
+        //软键盘弹出来时
+        mRelativeLayout.scrollBy(0, height / 2);
+    }
+
+    @Override
+    public void keyBoardHide(int height) {
+        //软键盘隐藏时
+        mRelativeLayout.scrollBy(0, 0 - height / 2);
     }
 }

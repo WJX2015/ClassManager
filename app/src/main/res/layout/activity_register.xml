@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/register_relative"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -44,6 +45,7 @@
             app:hintTextAppearance="@color/colorPrimary">
 
             <EditText
+                android:imeOptions="actionNext"
                 android:layout_gravity="center"
                 android:id="@+id/register_name"
                 android:layout_width="match_parent"
@@ -70,6 +72,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
+                android:imeOptions="actionNext"
                 android:layout_gravity="center"
                 android:id="@+id/register_pass"
                 android:layout_width="match_parent"
@@ -95,6 +98,7 @@
             app:counterOverflowTextAppearance="@color/colorPrimary">
 
             <EditText
+                android:imeOptions="actionNext"
                 android:layout_gravity="center"
                 android:id="@+id/register_phone"
                 android:layout_width="match_parent"
@@ -125,6 +129,7 @@
                 app:hintTextAppearance="@color/colorPrimary">
 
                 <EditText
+                    android:imeOptions="actionDone"
                     android:layout_gravity="center"
                     android:id="@+id/register_code"
                     android:layout_width="match_parent"

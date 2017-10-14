@@ -96,7 +96,6 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
         mButton_exit_class= (Button) findViewById(R.id.btn_exit_class);
         mButton_exitdel_class= (Button) findViewById(R.id.btn_exitdel_class);
 
-
         //当前用户不是管理员
         if (group.getOwner() == null || "".equals(group.getOwner())
                 || !group.getOwner().equals(EMClient.getInstance().getCurrentUser())) {
@@ -136,12 +135,23 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             case R.id.rl_class_code:
                 startActivity(ClassCodeActivity.class);
                 break;
+            case R.id.rl_class_file:
+                break;
+            case R.id.rl_class_grade:
+                break;
+            case R.id.rl_class_photo:
+                break;
+            case R.id.rl_change_class_name:
+                break;
+            case R.id.rl_change_class_description:
+                break;
+            case R.id.layout_class_notification:
+                break;
         }
     }
 
     private class AdminAdapter extends ArrayAdapter<String> {
         private int res;
-
 
         public AdminAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects) {
             super(context, resource, objects);
@@ -233,8 +243,6 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             }
             return owner.equals(EMClient.getInstance().getCurrentUser());
         }
-
-
     }
 
     private static class ViewHolder{
@@ -248,7 +256,6 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
 
         private MemberMenuDialog(@NonNull Context context) {
             super(context);
-
             init();
         }
 
@@ -384,9 +391,7 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
                             mProgressBar.setVisibility(View.INVISIBLE);
                         }
                     });
-
                 }
-
             }
         });
     }

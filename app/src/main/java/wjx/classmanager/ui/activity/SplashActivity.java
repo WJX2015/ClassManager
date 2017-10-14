@@ -12,7 +12,7 @@ import wjx.classmanager.view.SplashView;
 
 public class SplashActivity extends BaseActivity implements SplashView{
 
-    private static final int SLEEP_TIME=3000;
+    private static final int SLEEP_TIME=2000;
     private SplashPresentImpl mSplashPresent;
     private ImageView mImageView;
 
@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity implements SplashView{
         mSplashPresent =new SplashPresentImpl(this);
         mImageView = (ImageView) findViewById(R.id.splash_image);
         mImageView.setAlpha(0.4f);
-        mImageView.animate().alpha(1.0f).setDuration(2500).start();
+        mImageView.animate().alpha(1.0f).setDuration(1500).start();
 
         ThreadUtil.runOnBackgroundThread(new Runnable() {
             @Override

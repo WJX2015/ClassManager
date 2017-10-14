@@ -30,7 +30,7 @@ public class MessagePresenterImpl implements MessagePrestener {
     }
 
     private void initData() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             Message message = new Message();
             message.setIcon(R.drawable.title_bar_icon);
             message.setTitle("标题");

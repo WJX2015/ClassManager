@@ -445,6 +445,11 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
         return R.layout.activity_my_class;
     }
 
+    @Override
+    public boolean isImmersive() {
+        return false;
+    }
+
 
     /**
      * 群组事件监听

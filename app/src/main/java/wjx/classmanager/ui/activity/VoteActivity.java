@@ -23,4 +23,9 @@ public class VoteActivity extends BaseActivity {
     public int getLayout() {
         return R.layout.activity_vote;
     }
+
+    @Override
+    public boolean isImmersive() {
+        return false;
+    }
 }

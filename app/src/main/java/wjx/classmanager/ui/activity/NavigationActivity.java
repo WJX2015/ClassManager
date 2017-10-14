@@ -18,7 +18,6 @@ public class NavigationActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-        immersive();
         mTextView = (TextView) findViewById(R.id.nav_used);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(new NavPageAdapter());
@@ -41,13 +40,9 @@ public class NavigationActivity extends BaseActivity implements View.OnClickList
         return R.layout.activity_navigation;
     }
 
-    public void immersive() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+    @Override
+    public boolean isImmersive() {
+        return true;
     }
 
     @Override

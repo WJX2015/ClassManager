@@ -88,6 +88,11 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     }
 
     @Override
+    public boolean isImmersive() {
+        return false;
+    }
+
+    @Override
     public void classNameErroe() {
         new EaseAlertDialog(this, "班级名称不能为空！").show();
     }

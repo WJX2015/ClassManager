@@ -38,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayout());
         mContext = MyApplication.getMyContext();
         ActivityCollector.addActivity(this);
+        immersive(isImmersive());
 
         initView();
         initListener();
@@ -59,6 +60,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initData();
 
     public abstract int getLayout();
+
+    public abstract boolean isImmersive();
 
     protected void startActivity(Class activity) {
         startActivity(activity, false);
@@ -125,5 +128,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         mToast = null;
         mProgressDialog = null;
         ActivityCollector.removeActivity(this);
+    }
+
+    private void immersive(boolean request) {
+        if (Build.VERSION.SDK_INT >= 21 && request) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 }

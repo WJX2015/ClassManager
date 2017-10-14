@@ -23,4 +23,9 @@ public class EvaluateActivity extends BaseActivity {
     public int getLayout() {
         return R.layout.activity_evaluate;
     }
+
+    @Override
+    public boolean isImmersive() {
+        return false;
+    }
 }

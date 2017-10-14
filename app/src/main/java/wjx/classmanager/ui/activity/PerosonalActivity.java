@@ -23,4 +23,9 @@ public class PerosonalActivity extends BaseActivity {
     public int getLayout() {
         return R.layout.activity_perosonal;
     }
+
+    @Override
+    public boolean isImmersive() {
+        return false;
+    }
 }

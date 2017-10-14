@@ -57,6 +57,11 @@ public class SplashActivity extends BaseActivity implements SplashView{
     }
 
     @Override
+    public boolean isImmersive() {
+        return true;
+    }
+
+    @Override
     public void onLogIn() {
         startActivity(new Intent(SplashActivity.this,MainActivity.class));
         finish();

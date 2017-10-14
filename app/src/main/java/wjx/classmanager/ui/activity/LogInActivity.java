@@ -28,7 +28,6 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void initView() {
-        immersive();
         mRelativeLayout = (RelativeLayout) findViewById(R.id.log_relative);
         mUsername = (EditText) findViewById(R.id.log_name);
         mPassword = (EditText) findViewById(R.id.log_pass);
@@ -53,6 +52,11 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public int getLayout() {
         return R.layout.activity_log_in;
+    }
+
+    @Override
+    public boolean isImmersive() {
+        return true;
     }
 
     @Override
@@ -122,15 +126,6 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
             return true;
         }
         return false;
-    }
-
-    public void immersive() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
     }
 
     @Override

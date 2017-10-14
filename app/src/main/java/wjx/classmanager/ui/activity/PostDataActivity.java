@@ -23,4 +23,9 @@ public class PostDataActivity extends BaseActivity {
     public int getLayout() {
         return R.layout.activity_post_data;
     }
+
+    @Override
+    public boolean isImmersive() {
+        return false;
+    }
 }

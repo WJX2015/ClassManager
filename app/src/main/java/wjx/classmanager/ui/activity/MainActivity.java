@@ -73,8 +73,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void initView() {
-        immersive(); //沉浸式效果
-
         //控件绑定
         mSlideMenu = (SlideMenu) findViewById(R.id.slide_menu);
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
@@ -160,6 +158,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         return R.layout.activity_main;
     }
 
+    @Override
+    public boolean isImmersive() {
+        return true;
+    }
+
     /**
      * 显示某个Fragment
      *
@@ -176,15 +179,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mTransaction.show(mFragments[index]);
         mTransaction.replace(mFrameLayouts[index].getId(), mFragments[index]);
         mTransaction.commit();
-    }
-
-    public void immersive() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
     }
 
     @Override

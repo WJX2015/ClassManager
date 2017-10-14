@@ -37,7 +37,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
-        immersive();
         mName = (EditText) findViewById(R.id.register_name);
         mPass = (EditText) findViewById(R.id.register_pass);
         mPhone = (EditText) findViewById(R.id.register_phone);
@@ -108,6 +107,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public int getLayout() {
         return R.layout.activity_register;
+    }
+
+    @Override
+    public boolean isImmersive() {
+        return true;
     }
 
     @Override
@@ -196,15 +200,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             mGetCode.setText("获取验证码");
             mGetCode.setClickable(true);
             mGetCode.setBackgroundColor(Color.parseColor("#ffff8800"));
-        }
-    }
-
-    public void immersive() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
 

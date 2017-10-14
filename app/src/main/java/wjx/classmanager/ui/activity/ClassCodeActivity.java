@@ -49,6 +49,11 @@ public class ClassCodeActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
+    public boolean isImmersive() {
+        return false;
+    }
+
+    @Override
     public void onClick(View v) {
         finish();
     }

@@ -45,20 +45,19 @@ public class MessageItemView extends RelativeLayout implements Badge.OnDragState
         mTitle = (TextView) view.findViewById(R.id.item_title);
         mTime = (TextView) view.findViewById(R.id.item_time);
         mCount = (TextView) view.findViewById(R.id.item_count);
-        mQBadgeView =new QBadgeView(context).bindTarget(mIcon).setBadgeNumber(5);
+        mQBadgeView =new QBadgeView(context).bindTarget(mCount).setBadgeNumber(5);
         mLinearLayout = (LinearLayout) view.findViewById(R.id.item_msg_ll);
     }
 
     private void initListener() {
         mQBadgeView.setOnDragStateChangedListener(this);
-        //mLinearLayout.setOnClickListener(this);
     }
 
     public void bindView(Message message){
         mIcon.setImageResource(message.getIcon());
         mTitle.setText(message.getTitle());
         mTime.setText(message.getTime());
-        //mCount
+        //mQBadgeView.setBadgeNumber(message.getCount());
     }
 
     @Override

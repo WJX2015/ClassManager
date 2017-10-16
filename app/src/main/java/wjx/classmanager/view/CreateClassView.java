@@ -10,8 +10,8 @@ public interface CreateClassView {
 
     void onCreateClass();
 
-    void onCreateSuccess();
+    void onCreateSuccess(String groupId);
 
-    void onCreateFailed();
+    void onCreateFailed(String error);
 
 }

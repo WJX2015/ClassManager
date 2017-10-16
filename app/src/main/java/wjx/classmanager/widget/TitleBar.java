@@ -128,6 +128,9 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
                 getContext().startActivity(intent);
                 break;
             case R.id.menu_join:
+                if(mOnScanClickListener!=null) {
+                    mOnScanClickListener.onJoinCLick();
+                }
                 break;
             case R.id.menu_scan:
                 if(mOnScanClickListener!=null) {
@@ -142,6 +145,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
 
     public interface onScanClickListener{
         void onScanClick();
+        void onJoinCLick();
     }
 
     public void setOnScanClickListener(onScanClickListener onScanClickListener){

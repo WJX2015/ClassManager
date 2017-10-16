@@ -5,4 +5,9 @@ package wjx.classmanager.presenter;
  */
 
 public interface MyclassPresenter {
+    void disbandClass(String groupId);
+    void exitClass(String groupId);
+
+    void changeClassDesc(String groupId);
+    void changeClassName(String groupId);
 }

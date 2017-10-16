@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/item_msg_ll"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
-        android:layout_margin="5dp"
-        android:id="@+id/item_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"/>
+            android:src="@drawable/title_bar_icon"
+            android:id="@+id/item_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"/>
 
-    <LinearLayout
-        android:layout_margin="5dp"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="消息标题"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息发布时间"/>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/item_title"
-            android:text="消息标题"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="5dp"
+            android:id="@+id/item_count"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/item_time"
-            android:text="消息发布时间"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_gravity="center"
-        android:text="数量"
-        android:layout_marginRight="5dp"
-        android:id="@+id/item_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:text="数量"/>
     </LinearLayout>
 
     <View
-        android:background="@color/bg_gray"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="@color/bg_gray"/>
 </LinearLayout>

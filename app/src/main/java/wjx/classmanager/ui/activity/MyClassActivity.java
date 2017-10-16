@@ -2,6 +2,7 @@ package wjx.classmanager.ui.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,11 +36,14 @@ import wjx.classmanager.presenter.MyclassPresenter;
 import wjx.classmanager.presenter.impl.MyclassPresenterImpl;
 import wjx.classmanager.utils.EaseUserUtils;
 import wjx.classmanager.utils.ThreadUtil;
+import wjx.classmanager.view.MyClassView;
 
+import static wjx.classmanager.model.Constant.MyClass.CLASS_DESC_CODE;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
+import static wjx.classmanager.model.Constant.MyClass.CLASS_NAME_CODE;
 
 
-public class MyClassActivity extends BaseActivity implements View.OnClickListener{
+public class MyClassActivity extends BaseActivity implements View.OnClickListener,MyClassView{
 
     private final String TAG="MyClassActivity";
     private LinearLayout mLinearLayout_back;
@@ -63,7 +67,7 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
 
     GroupChangeListener groupChangeListener;
     private AdminAdapter mAdminAdapter;
-    private MyclassPresenter mMyclassPresenter;
+    private MyclassPresenterImpl mMyclassPresenter;
     //管理员列表
     private List<String> adminList = Collections.synchronizedList(new ArrayList<String>());
 
@@ -80,8 +84,7 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void initView() {
         init();
-        mMyclassPresenter=new MyclassPresenterImpl();
-
+        mMyclassPresenter=new MyclassPresenterImpl(this);
         mLinearLayout_back= (LinearLayout) findViewById(R.id.ll_back);
         mTextView_class_name= (TextView) findViewById(R.id.class_name);
         mProgressBar= (ProgressBar) findViewById(R.id.progressBar);
@@ -118,7 +121,6 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
         //班级名称
         mTextView_class_name.setText(group.getGroupName() + "(" + group.getMemberCount() + ">人)");
 
-
         mAdminAdapter = new AdminAdapter(this, R.layout.em_grid_owner, new ArrayList<String>());
         mEaseExpandGridView_admin.setAdapter(mAdminAdapter);
 
@@ -142,12 +144,79 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             case R.id.rl_class_photo:
                 break;
             case R.id.rl_change_class_name:
+                startActivityForResult(new Intent(MyClassActivity.this,EditorActivity.class),CLASS_NAME_CODE);
                 break;
             case R.id.rl_change_class_description:
+                startActivityForResult(new Intent(MyClassActivity.this,EditorActivity.class),CLASS_DESC_CODE);
                 break;
             case R.id.layout_class_notification:
                 break;
+            case R.id.btn_exit_class:
+                mMyclassPresenter.exitClass(groupId);
+                break;
+            case R.id.btn_exitdel_class:
+                mMyclassPresenter.disbandClass(groupId);
+                break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode==RESULT_OK){
+            switch (requestCode){
+                case CLASS_NAME_CODE:
+                    mMyclassPresenter.changeClassName(groupId);
+                    break;
+                case CLASS_DESC_CODE:
+                    mMyclassPresenter.changeClassDesc(groupId);
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onFailed(final String s) {
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                hideProgress();
+                showToast(s);
+            }
+        });
+    }
+
+    @Override
+    public void onExitSuccess(final String s) {
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                hideProgress();
+                showToast(s);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void onStartDealWith(final String msg) {
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showProgress(msg);
+            }
+        });
+    }
+
+    @Override
+    public void onChangeSuccess(final String s) {
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                hideProgress();
+                showToast(s);
+            }
+        });
     }
 
     private class AdminAdapter extends ArrayAdapter<String> {
@@ -236,7 +305,7 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
          * @param group
          * @return
          */
-        boolean isCurrentOwner(EMGroup group) {
+        private boolean isCurrentOwner(EMGroup group) {
             String owner = group.getOwner();
             if (owner == null || owner.isEmpty()) {
                 return false;
@@ -433,6 +502,8 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
         mRelativeLayout_class_grade.setOnClickListener(this);
         mRelativeLayout_class_notification.setOnClickListener(this);
         mRelativeLayout_class_photo.setOnClickListener(this);
+        mButton_exit_class.setOnClickListener(this);
+        mButton_exitdel_class.setOnClickListener(this);
     }
 
     @Override

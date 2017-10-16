@@ -149,4 +149,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         mMessages.remove(position);
         notifyDataSetChanged();
     }
+
+    public static void addMessageForBroadcast(Message message){
+
+    }
 }

@@ -66,7 +66,6 @@
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -87,6 +86,13 @@
         <activity android:name="wjx.classlibrary.zxing.CustomScanActivity">
         </activity>
         <activity android:name=".ui.activity.ClassCodeActivity">
+        </activity>
+        <activity android:name=".ui.activity.JoinClassActivity">
+        </activity>
+        <activity android:name=".ui.activity.ErrorActivity">
+        </activity>
+        <activity android:name=".ui.activity.EditorActivity">
+
         </activity>
     </application>
 

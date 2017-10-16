@@ -250,6 +250,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
+    public void onJoinCLick() {
+        startActivity(JoinClassActivity.class);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().removeConnectionListener(mEMConnectionListener);

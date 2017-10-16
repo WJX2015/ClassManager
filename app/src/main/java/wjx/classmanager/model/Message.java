@@ -1,10 +1,12 @@
 package wjx.classmanager.model;
 
+import java.io.Serializable;
+
 /**
  * Created by wjx on 2017/10/3.
  */
 
-public class Message {
+public class Message implements Serializable{
     private int icon;
     private String title;
     private String time;

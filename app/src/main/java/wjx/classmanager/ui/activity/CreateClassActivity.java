@@ -1,5 +1,6 @@
 package wjx.classmanager.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -8,20 +9,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMGroup;
-import com.hyphenate.exceptions.HyphenateException;
-
-import java.util.List;
-
 import wjx.classlibrary.ease.EaseAlertDialog;
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.presenter.impl.CreateClassPresenterImpl;
 import wjx.classmanager.view.CreateClassView;
 
-import static android.provider.Contacts.GroupMembership.GROUP_ID;
-import static com.hyphenate.chat.a.a.a.f;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 
 public class CreateClassActivity extends BaseActivity implements CreateClassView, View.OnClickListener {
@@ -39,7 +32,6 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     private CheckBox mInviterBox;
 
     private CreateClassPresenter mCreateClassPresenter;
-    protected List<EMGroup> grouplist;
 
     private static String mGroupId;
 
@@ -103,24 +95,10 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     }
 
     @Override
-    public void onCreateSuccess() {
+    public void onCreateSuccess(String groupId) {
         hideProgress();
-        try {
-            grouplist = EMClient.getInstance().groupManager().getJoinedGroupsFromServer();
-        } catch (HyphenateException e) {
-            e.printStackTrace();
-        }
-        grouplist = EMClient.getInstance().groupManager().getAllGroups();
-        String className=mGroupNameEdit.getText().toString();
-
-        for (EMGroup group:grouplist){
-            if (group.getGroupName().equals(className)){
-                mGroupId=group.getGroupId();
-                startActivity(MyClassActivity.class,CLASS_GROUP_ID,mGroupId);
-                finish();
-                break;
-            }
-        }
+        mGroupId=groupId;
+        startActivity(MyClassActivity.class,CLASS_GROUP_ID,groupId);
     }
 
     public static String getGroupId(){
@@ -128,9 +106,9 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     }
 
     @Override
-    public void onCreateFailed() {
+    public void onCreateFailed(String s) {
         hideProgress();
-        showToast("创建失败");
+        showToast(s);
     }
 
     @Override

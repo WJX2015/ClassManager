@@ -14,6 +14,7 @@
         android:src="@drawable/back_icon"/>
 
     <TextView
+        android:text="标题"
         android:id="@+id/back_title"
         android:layout_width="100dp"
         android:layout_height="wrap_content"

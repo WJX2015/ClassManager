@@ -40,5 +40,8 @@ public class Constant { //常量类
 
     public static class MyClass{
         public static final String CLASS_GROUP_ID="class_group_id";
+        public static final String CLASS_EDIT="class_edit";
+        public static final int CLASS_NAME_CODE=1001;
+        public static final int CLASS_DESC_CODE=1002;
     }
 }

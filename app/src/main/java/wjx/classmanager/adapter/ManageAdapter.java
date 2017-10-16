@@ -1,5 +1,6 @@
 package wjx.classmanager.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import wjx.classmanager.widget.ManageItemView;
 public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.ManageViewHolder> {
 
     private List<Manage> mManages;
+    private Context mContext;
 
     public ManageAdapter(List<Manage> manages) {
         mManages = manages;
@@ -29,12 +31,13 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.ManageView
 
     @Override
     public ManageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ManageViewHolder(new ManageItemView(parent.getContext()));
+        mContext=parent.getContext();
+        return new ManageViewHolder(new ManageItemView(mContext));
     }
 
     @Override
     public void onBindViewHolder(ManageViewHolder holder, final int position) {
-        holder.mManageItemView.bindView(mManages.get(position));
+        holder.mManageItemView.bindView(mContext,mManages.get(position));
         holder.mManageItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

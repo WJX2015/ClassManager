@@ -1,5 +1,8 @@
 package wjx.classmanager.presenter.impl;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,6 +17,8 @@ import wjx.classmanager.model.Message;
 import wjx.classmanager.presenter.MessagePrestener;
 import wjx.classmanager.view.MessageView;
 import wjx.classmanager.widget.MessageItemView;
+
+import static wjx.classmanager.model.Constant.Receiver.RECEIVE;
 
 /**
  * Created by wjx on 2017/10/9.
@@ -42,4 +47,5 @@ public class MessagePresenterImpl implements MessagePrestener {
     public List<Message> getMessageList(){
         return mMessages;
     }
+
 }

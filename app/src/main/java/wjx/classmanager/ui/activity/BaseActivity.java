@@ -9,16 +9,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import wjx.classmanager.R;
 import wjx.classmanager.application.MyApplication;
 import wjx.classmanager.collector.ActivityCollector;
+import wjx.classmanager.model.Constant;
+import wjx.classmanager.model.Message;
 
 import static java.security.AccessController.getContext;
+import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 
 /**
  * Created by wjx on 2017/9/14.
@@ -137,5 +142,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    /**
+     * 发送消息广播
+     * @param message
+     */
+    public void sendMessageBroadcast(Message message){
+        Intent intent = new Intent(Constant.Receiver.ACTION);
+        intent.putExtra(Constant.Receiver.RECEIVE,message);
+        LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
     }
 }

@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import wjx.classmanager.R;
 import wjx.classmanager.model.Manage;
+
+import static wjx.classmanager.R.string.manage;
 
 /**
  * Created by wjx on 2017/9/25.
@@ -39,8 +43,8 @@ public class ManageItemView extends RelativeLayout {
         mTitle = (TextView) mView.findViewById(R.id.item_title);
     }
 
-    public void bindView(Manage manage) {
-        mIcon.setImageResource(manage.getIcon());
+    public void bindView(Context context,Manage manage) {
+        Glide.with(context).load(manage.getIcon()).into(mIcon);
         mTitle.setText(manage.getTitle());
     }
 }

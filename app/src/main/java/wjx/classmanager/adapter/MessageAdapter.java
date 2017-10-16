@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Collections;
 import java.util.List;
 
 import wjx.classmanager.R;
@@ -24,6 +23,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private List<Message> mMessages;
     private int mMessagePosition;
+    private int mMessageLastCount;
     private Context mContext;
 
     public MessageAdapter(List<Message> messages) {
@@ -38,10 +38,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public void onBindViewHolder(final MessageViewHolder holder, final int position) {
-        holder.mMessageItemView.bindView(mMessages.get(position));
+        holder.mMessageItemView.bindView(mContext,mMessages.get(position));
         holder.mMessageItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //跳转到消息Type列表
                 updateMessageItem(position);
             }
         });
@@ -80,6 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if (checkMessageType(message.getType())) {
             mMessages.remove(mMessagePosition);
         }
+        message.setCount(++mMessageLastCount);
         mMessages.add(0, message);
         notifyDataSetChanged();
     }
@@ -94,6 +96,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         for (int i = 0; i < mMessages.size(); i++) {
             if (mMessages.get(i).getType() == type) {
                 mMessagePosition = i;
+                mMessageLastCount =mMessages.get(i).getCount();
                 return true;
             }
         }
@@ -148,9 +151,5 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private void deleteMessageItem(int position){
         mMessages.remove(position);
         notifyDataSetChanged();
-    }
-
-    public static void addMessageForBroadcast(Message message){
-
     }
 }

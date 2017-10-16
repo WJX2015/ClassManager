@@ -27,21 +27,24 @@ public class Constant { //常量类
     public static class MessageType {
         public static final int JOIN_CLASS = 4;       //加入班级
         public static final int QUIT_CLASS = 5;       //退出班级
-        public static final int EVALUATE = 6;         //推优评优
-        public static final int ACTIVITY_VOTE = 7;    //活动投票
-        public static final int POST_DATA = 8;        //上传资料
-        public static final int PERSON_INFO = 9;      //个人信息
-        public static final int PHOTO_CLASS = 10;     //班级相册
+        public static final int CREATE_CLASS = 6;     //创建班级
+        public static final int EVALUATE = 7;         //推优评优
+        public static final int ACTIVITY_VOTE = 8;    //活动投票
+        public static final int POST_DATA = 9;        //上传资料
+        public static final int PERSON_INFO = 10;      //个人信息
+        public static final int PHOTO_CLASS = 11;     //班级相册
     }
 
-    public static class Receiver{
-        public static final String ACTION ="receiver_action";
+    public static class Receiver {
+        public static final String ACTION = "action";
+        public static final String RECEIVE = "receive";
+
     }
 
-    public static class MyClass{
-        public static final String CLASS_GROUP_ID="class_group_id";
-        public static final String CLASS_EDIT="class_edit";
-        public static final int CLASS_NAME_CODE=1001;
-        public static final int CLASS_DESC_CODE=1002;
+    public static class MyClass {
+        public static final String CLASS_GROUP_ID = "class_group_id";
+        public static final String CLASS_EDIT = "class_edit";
+        public static final int CLASS_NAME_CODE = 1001;
+        public static final int CLASS_DESC_CODE = 1002;
     }
 }

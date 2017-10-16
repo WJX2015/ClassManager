@@ -1,16 +1,22 @@
 package wjx.classmanager.ui.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.MessageAdapter;
 import wjx.classmanager.model.Constant;
+import wjx.classmanager.model.Message;
 import wjx.classmanager.presenter.impl.MessagePresenterImpl;
-import wjx.classmanager.receiver.MessageReceiver;
 import wjx.classmanager.view.MessageView;
+
+import static wjx.classmanager.model.Constant.Receiver.RECEIVE;
 
 /**
  * Created by wjx on 2017/9/16.
@@ -56,5 +62,16 @@ public class MessageFragment extends BaseFragment implements MessageView{
     public void onDestroy() {
         super.onDestroy();
         mLocalBroadcastManager.unregisterReceiver(mMessageReceiver);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Message message= (Message) intent.getSerializableExtra(RECEIVE);
+            if(message!=null){
+                mMessageAdapter.addMessageItem(message);
+            }
+            Log.e( "onReceive: ","我接收到信息啦" );
+        }
     }
 }

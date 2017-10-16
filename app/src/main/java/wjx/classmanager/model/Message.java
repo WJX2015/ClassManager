@@ -11,6 +11,15 @@ public class Message implements Serializable{
     private String title;
     private String time;
 
+    public Message(){}
+
+    public Message(int icon,String title,String time,int type){
+        this.icon=icon;
+        this.title=title;
+        this.time=time;
+        this.type=type;
+    }
+
     public int getIcon() {
         return icon;
     }
@@ -43,7 +52,7 @@ public class Message implements Serializable{
         this.count = count;
     }
 
-    private int count;
+    private int count=1;
     private int type;
 
     public int getType() {

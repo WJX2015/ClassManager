@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import wjx.classlibrary.ease.EaseAlertDialog;
 import wjx.classmanager.R;
+import wjx.classmanager.model.Message;
 import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.presenter.impl.CreateClassPresenterImpl;
 import wjx.classmanager.view.CreateClassView;
 
+import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 
 public class CreateClassActivity extends BaseActivity implements CreateClassView, View.OnClickListener {
@@ -109,6 +111,15 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     public void onCreateFailed(String s) {
         hideProgress();
         showToast(s);
+    }
+
+    @Override
+    public void sendBroadcast() {
+        Message message = new Message();
+        message.setIcon(R.drawable.title_bar_icon);
+        message.setTitle("创建班级");
+        message.setType(CREATE_CLASS);
+        sendMessageBroadcast(message);
     }
 
     @Override

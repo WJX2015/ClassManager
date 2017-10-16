@@ -14,4 +14,5 @@ public interface CreateClassView {
 
     void onCreateFailed(String error);
 
+    void sendBroadcast();
 }

@@ -10,16 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 import wjx.classmanager.R;
 import wjx.classmanager.model.Message;
 
+import static wjx.classmanager.R.string.manage;
+
 /**
  * Created by wjx on 2017/10/3.
  */
 
-public class MessageItemView extends RelativeLayout implements Badge.OnDragStateChangedListener,View.OnClickListener{
+public class MessageItemView extends RelativeLayout implements Badge.OnDragStateChangedListener{
 
     private ImageView mIcon;    //图标
     private TextView mTitle;    //消息标题
@@ -27,7 +31,6 @@ public class MessageItemView extends RelativeLayout implements Badge.OnDragState
     private TextView mCount;    //消息数量
 
     private Badge mQBadgeView;
-    private LinearLayout mLinearLayout;
 
     public MessageItemView(Context context) {
         this(context,null);
@@ -45,31 +48,23 @@ public class MessageItemView extends RelativeLayout implements Badge.OnDragState
         mTitle = (TextView) view.findViewById(R.id.item_title);
         mTime = (TextView) view.findViewById(R.id.item_time);
         mCount = (TextView) view.findViewById(R.id.item_count);
-        mQBadgeView =new QBadgeView(context).bindTarget(mCount).setBadgeNumber(5);
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.item_msg_ll);
+        mQBadgeView =new QBadgeView(context).bindTarget(mCount).setBadgeNumber(-1);
     }
 
     private void initListener() {
         mQBadgeView.setOnDragStateChangedListener(this);
     }
 
-    public void bindView(Message message){
-        mIcon.setImageResource(message.getIcon());
+    public void bindView(Context context,Message message){
+        Glide.with(context).load(message.getIcon()).into(mIcon);
         mTitle.setText(message.getTitle());
         mTime.setText(message.getTime());
-        //mQBadgeView.setBadgeNumber(message.getCount());
+        mQBadgeView.setBadgeNumber(message.getCount());
     }
 
     @Override
     public void onDragStateChanged(int dragState, Badge badge, View targetView) {
         switch (dragState){
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        int number=mQBadgeView.getBadgeNumber();
-        number++;
-        mQBadgeView.setBadgeNumber(number);
     }
 }

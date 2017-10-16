@@ -24,8 +24,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import wjx.classlibrary.zxing.CustomScanActivity;
 import wjx.classmanager.R;
 import wjx.classmanager.model.Constant;
+import wjx.classmanager.model.Message;
 import wjx.classmanager.ui.activity.CreateClassActivity;
 import wjx.classmanager.ui.activity.MainActivity;
+
+import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 
 /**
  * Created by wjx on 2017/9/16.
@@ -105,8 +108,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
                 mSlideMenu.toggleMenu();
                 break;
             case R.id.title_add:
-                Intent intent = new Intent(Constant.Receiver.ACTION);
-                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+
                 mMenu.show();
                 break;
         }

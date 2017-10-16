@@ -73,6 +73,9 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
 
     private void init() {
         groupId = getIntent().getStringExtra(CLASS_GROUP_ID);
+        if(groupId==null){
+            return;
+        }
         group = EMClient.getInstance().groupManager().getGroup(groupId);
 
         if(group == null){

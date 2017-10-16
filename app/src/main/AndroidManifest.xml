@@ -91,8 +91,9 @@
         </activity>
         <activity android:name=".ui.activity.ErrorActivity">
         </activity>
-        <activity android:name=".ui.activity.EditorActivity">
-
+        <activity
+            android:name=".ui.activity.EditorActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 

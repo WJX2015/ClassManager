@@ -129,8 +129,8 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
                         @Override
                         public void run() {
                             Log.e( "run: ", "Bomb创建班级表成功");
-                            mCreateClassView.onCreateSuccess(groupId);
                             mCreateClassView.sendBroadcast();
+                            mCreateClassView.onCreateSuccess(groupId);
                         }
                     });
                 }else{

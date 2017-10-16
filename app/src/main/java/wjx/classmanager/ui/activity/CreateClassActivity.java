@@ -14,6 +14,7 @@ import wjx.classmanager.R;
 import wjx.classmanager.model.Message;
 import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.presenter.impl.CreateClassPresenterImpl;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.CreateClassView;
 
 import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
@@ -34,8 +35,6 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     private CheckBox mInviterBox;
 
     private CreateClassPresenter mCreateClassPresenter;
-
-    private static String mGroupId;
 
     @Override
     public void initView() {
@@ -99,12 +98,9 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     @Override
     public void onCreateSuccess(String groupId) {
         hideProgress();
-        mGroupId=groupId;
+        SPUtil.huanXinGroupId(mContext,groupId);
         startActivity(MyClassActivity.class,CLASS_GROUP_ID,groupId);
-    }
-
-    public static String getGroupId(){
-        return mGroupId;
+        finish();
     }
 
     @Override

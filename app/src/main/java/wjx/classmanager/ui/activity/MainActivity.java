@@ -37,6 +37,7 @@ import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.SlideMenu;
 import wjx.classmanager.widget.TitleBar;
 
+import static wjx.classmanager.model.Constant.ErrorCode.ERROR_ACTIVITY;
 import static wjx.classmanager.model.Constant.FragmentType.CREATE_MANAGE;
 import static wjx.classmanager.model.Constant.FragmentType.CREATE_MESSAGE;
 import static wjx.classmanager.model.Constant.FragmentType.CREATE_NOTIFY;
@@ -230,6 +231,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void intentMyClass(String groupId) {
         startActivity(MyClassActivity.class,CLASS_GROUP_ID,groupId);
+    }
+
+    @Override
+    public void onError(String error) {
+        startActivity(ErrorActivity.class,ERROR_ACTIVITY,error);
     }
 
     @Override

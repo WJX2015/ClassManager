@@ -16,4 +16,5 @@ public interface MainView {
 
     void intentMyClass(String groupId);
 
+    void onError(String error);
 }

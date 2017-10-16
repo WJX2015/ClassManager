@@ -8,13 +8,10 @@ import com.hyphenate.chat.EMClient;
 
 import cn.bmob.v3.BmobUser;
 import wjx.classmanager.R;
-import wjx.classmanager.adapter.MessageAdapter;
 import wjx.classmanager.presenter.MainPresenter;
-import wjx.classmanager.ui.activity.CreateClassActivity;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.ExitDialog;
-
-import static wjx.classmanager.ui.activity.CreateClassActivity.getGroupId;
 
 /**
  * Created by wjx on 2017/10/5.
@@ -32,11 +29,11 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
 
     @Override
     public void myClass() {
-        String id=CreateClassActivity.getGroupId();
+        String id= SPUtil.getGroupId(mContext);
         if(id!=null){
             mMainView.intentMyClass(id);
         }else{
-
+            mMainView.onError("您当前没有班级");
         }
     }
 

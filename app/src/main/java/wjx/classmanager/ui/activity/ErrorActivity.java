@@ -8,6 +8,7 @@ import android.widget.TextView;
 import wjx.classmanager.R;
 
 import static android.R.attr.onClick;
+import static wjx.classmanager.model.Constant.ErrorCode.ERROR_ACTIVITY;
 
 public class ErrorActivity extends BaseActivity implements View.OnClickListener{
 
@@ -30,7 +31,7 @@ public class ErrorActivity extends BaseActivity implements View.OnClickListener{
     @Override
     public void initData() {
         mTextTitle.setText("错误页");
-        mTextError.setText(getIntent().getStringExtra(""));
+        mTextError.setText(getIntent().getStringExtra(ERROR_ACTIVITY));
     }
 
     @Override

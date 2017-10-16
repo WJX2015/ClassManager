@@ -3,6 +3,7 @@ package wjx.classmanager.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,7 +30,6 @@ public class MessageItemView extends RelativeLayout implements Badge.OnDragState
     private TextView mTitle;    //消息标题
     private TextView mTime;     //发布时间
     private TextView mCount;    //消息数量
-
     private Badge mQBadgeView;
 
     public MessageItemView(Context context) {
@@ -65,6 +65,17 @@ public class MessageItemView extends RelativeLayout implements Badge.OnDragState
     @Override
     public void onDragStateChanged(int dragState, Badge badge, View targetView) {
         switch (dragState){
+            case STATE_START:
+                break;
+            case STATE_DRAGGING:
+                break;
+            case STATE_DRAGGING_OUT_OF_RANGE:
+                break;
+            case STATE_CANCELED:
+                break;
+            case STATE_SUCCEED:
+                badge.setBadgeNumber(0);
+                break;
         }
     }
 }

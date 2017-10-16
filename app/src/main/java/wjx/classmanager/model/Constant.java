@@ -9,6 +9,8 @@ public class Constant { //常量类
     //登录用户已存在
     public static class ErrorCode {
         public static final int USER_ALREADY_EXIST = 202;
+        public static final String ERROR_ACTIVITY = "error_activity";
+
     }
 
     public static class FragmentType {
@@ -46,5 +48,11 @@ public class Constant { //常量类
         public static final String CLASS_EDIT = "class_edit";
         public static final int CLASS_NAME_CODE = 1001;
         public static final int CLASS_DESC_CODE = 1002;
+    }
+
+    public static class SharePreference {
+        public static final String BMOB = "bmob";
+        public static final String HUAN_XIN = "huan_xin";
+        public static final String CURR_USER = "curr_user";
     }
 }

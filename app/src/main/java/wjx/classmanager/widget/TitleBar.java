@@ -108,7 +108,6 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
                 mSlideMenu.toggleMenu();
                 break;
             case R.id.title_add:
-
                 mMenu.show();
                 break;
         }

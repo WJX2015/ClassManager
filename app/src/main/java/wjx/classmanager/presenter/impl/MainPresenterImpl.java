@@ -49,7 +49,12 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
 
     @Override
     public void postData() {
-
+        String id= SPUtil.getGroupId(mContext);
+        if(id!=null){
+            mMainView.intentPostData(id);
+        }else{
+            mMainView.onError("您当前没有班级");
+        }
     }
 
     @Override

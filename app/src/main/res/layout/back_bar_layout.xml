@@ -24,12 +24,11 @@
         android:textSize="20sp"/>
 
     <ImageView
-        android:id="@+id/back_edit"
+        android:id="@+id/back_add"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
-        android:src="@drawable/title_bar_add"
-        android:visibility="gone"/>
+        android:src="@drawable/title_bar_add"/>
 </RelativeLayout>

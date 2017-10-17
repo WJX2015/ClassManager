@@ -30,11 +30,12 @@ public class Constant { //常量类
         public static final int JOIN_CLASS = 4;       //加入班级
         public static final int QUIT_CLASS = 5;       //退出班级
         public static final int CREATE_CLASS = 6;     //创建班级
-        public static final int EVALUATE = 7;         //推优评优
-        public static final int ACTIVITY_VOTE = 8;    //活动投票
-        public static final int POST_DATA = 9;        //上传资料
-        public static final int PERSON_INFO = 10;      //个人信息
-        public static final int PHOTO_CLASS = 11;     //班级相册
+        public static final int DIABAND_CLASS = 7;    //解散班级
+        public static final int EVALUATE = 8;         //推优评优
+        public static final int ACTIVITY_VOTE = 9;    //活动投票
+        public static final int POST_DATA = 10;        //上传资料
+        public static final int PERSON_INFO = 11;      //个人信息
+        public static final int PHOTO_CLASS = 12;     //班级相册
     }
 
     public static class Receiver {

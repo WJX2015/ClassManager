@@ -32,12 +32,14 @@ import java.util.List;
 import wjx.classlibrary.ease.EaseExpandGridView;
 import wjx.classmanager.R;
 import wjx.classmanager.listener.EaseGroupListener;
+import wjx.classmanager.model.Message;
 import wjx.classmanager.presenter.MyclassPresenter;
 import wjx.classmanager.presenter.impl.MyclassPresenterImpl;
 import wjx.classmanager.utils.EaseUserUtils;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MyClassView;
 
+import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_DESC_CODE;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_NAME_CODE;
@@ -220,6 +222,15 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
                 showToast(s);
             }
         });
+    }
+
+    @Override
+    public void sendBroadcast(String title,int type) {
+        Message message = new Message();
+        message.setIcon(R.drawable.title_bar_icon);
+        message.setTitle(title);
+        message.setType(type);
+        sendMessageBroadcast(message);
     }
 
     private class AdminAdapter extends ArrayAdapter<String> {

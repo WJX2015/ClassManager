@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -32,6 +33,7 @@ import wjx.classmanager.ui.fragment.ManageFragment;
 import wjx.classmanager.ui.fragment.MessageFragment;
 import wjx.classmanager.ui.fragment.MemberFragment;
 import wjx.classmanager.presenter.impl.MainPresenterImpl;
+import wjx.classmanager.utils.GroupUtil;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.SlideMenu;
@@ -239,6 +241,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
+    public void intentPostData(String groupId) {
+        startActivity(PostDataActivity.class,CLASS_GROUP_ID,groupId);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null && intentResult.getContents() != null) {
@@ -257,7 +264,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onJoinCLick() {
-        startActivity(JoinClassActivity.class);
+        if (GroupUtil.isHaveGroup()){
+            showToast("你已有班级了");
+        }else {
+            startActivity(JoinClassActivity.class);
+        }
     }
 
     @Override

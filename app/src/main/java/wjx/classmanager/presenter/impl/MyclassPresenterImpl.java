@@ -10,6 +10,9 @@ import wjx.classmanager.presenter.MyclassPresenter;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MyClassView;
 
+import static wjx.classmanager.model.Constant.MessageType.DIABAND_CLASS;
+import static wjx.classmanager.model.Constant.MessageType.QUIT_CLASS;
+
 /**
  * Created by wjx on 2017/9/20.
  */
@@ -31,6 +34,7 @@ public class MyclassPresenterImpl implements MyclassPresenter {
                 try {
                     EMClient.getInstance().groupManager().destroyGroup(groupId);//需异步处理
                     Thread.sleep(2000);
+                    mMyClassView.sendBroadcast("解散班级",DIABAND_CLASS);
                     mMyClassView.onExitSuccess("解散班级成功");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -49,6 +53,7 @@ public class MyclassPresenterImpl implements MyclassPresenter {
                 try {
                     EMClient.getInstance().groupManager().leaveGroup(groupId);//需异步处理
                     Thread.sleep(2000);
+                    mMyClassView.sendBroadcast("退出班级",QUIT_CLASS);
                     mMyClassView.onExitSuccess("退出班级成功");
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -27,6 +28,7 @@ import wjx.classmanager.model.Constant;
 import wjx.classmanager.model.Message;
 import wjx.classmanager.ui.activity.CreateClassActivity;
 import wjx.classmanager.ui.activity.MainActivity;
+import wjx.classmanager.utils.GroupUtil;
 
 import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 
@@ -125,8 +127,12 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_create:
-                Intent intent=new Intent(getContext(), CreateClassActivity.class);
-                getContext().startActivity(intent);
+                if (GroupUtil.isHaveGroup()){
+                    Toast.makeText(getContext(), "你已有班级了", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent=new Intent(getContext(), CreateClassActivity.class);
+                    getContext().startActivity(intent);
+                }
                 break;
             case R.id.menu_join:
                 if(mOnScanClickListener!=null) {

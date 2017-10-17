@@ -18,6 +18,7 @@ import cn.bmob.v3.listener.SaveListener;
 import wjx.classmanager.model.BmobClass;
 import wjx.classmanager.presenter.CreateClassPresenter;
 import wjx.classmanager.ui.activity.MyClassActivity;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.CreateClassView;
 
@@ -122,7 +123,7 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
         bmobClass.setGroupid(groupId);
         bmobClass.save(new SaveListener<String>() {
             @Override
-            public void done(String s, BmobException e) {
+            public void done(final String objectId, BmobException e) {
                 if(e==null){
                     //通知view创建完成
                     ThreadUtil.runOnUiThread(new Runnable() {
@@ -130,7 +131,7 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
                         public void run() {
                             Log.e( "run: ", "Bomb创建班级表成功");
                             mCreateClassView.sendBroadcast();
-                            mCreateClassView.onCreateSuccess(groupId);
+                            mCreateClassView.onCreateSuccess(groupId,objectId);
                         }
                     });
                 }else{

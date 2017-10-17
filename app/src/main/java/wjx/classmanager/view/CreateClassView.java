@@ -10,7 +10,7 @@ public interface CreateClassView {
 
     void onCreateClass();
 
-    void onCreateSuccess(String groupId);
+    void onCreateSuccess(String groupId,String objectId);
 
     void onCreateFailed(String error);
 

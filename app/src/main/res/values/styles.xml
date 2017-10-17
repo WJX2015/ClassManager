@@ -42,4 +42,9 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="PopupWindowAnim">
+        <item name="android:windowEnterAnimation">@anim/popup_up</item>
+        <item name="android:windowExitAnimation">@anim/popup_down</item>
+    </style>
+
 </resources>

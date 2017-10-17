@@ -41,6 +41,7 @@ import wjx.classmanager.view.MyClassView;
 
 import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_DESC_CODE;
+import static wjx.classmanager.model.Constant.MyClass.CLASS_EDIT;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_NAME_CODE;
 
@@ -147,6 +148,7 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             case R.id.rl_class_grade:
                 break;
             case R.id.rl_class_photo:
+                startActivity(new Intent(MyClassActivity.this,ClassPhotoActivity.class));
                 break;
             case R.id.rl_change_class_name:
                 startActivityForResult(new Intent(MyClassActivity.this,EditorActivity.class),CLASS_NAME_CODE);
@@ -170,10 +172,10 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
         if(resultCode==RESULT_OK){
             switch (requestCode){
                 case CLASS_NAME_CODE:
-                    mMyclassPresenter.changeClassName(groupId);
+                    mMyclassPresenter.changeClassName(groupId,data.getStringExtra(CLASS_EDIT));
                     break;
                 case CLASS_DESC_CODE:
-                    mMyclassPresenter.changeClassDesc(groupId);
+                    mMyclassPresenter.changeClassDesc(groupId,data.getStringExtra(CLASS_EDIT));
                     break;
             }
         }

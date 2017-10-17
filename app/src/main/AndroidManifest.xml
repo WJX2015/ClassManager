@@ -66,6 +66,7 @@
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -94,6 +95,10 @@
         <activity
             android:name=".ui.activity.EditorActivity"
             android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.activity.ClassPhotoActivity">
+        </activity>
+        <activity android:name=".ui.activity.ImageLoaderActivity">
         </activity>
     </application>
 

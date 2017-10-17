@@ -8,6 +8,6 @@ public interface MyclassPresenter {
     void disbandClass(String groupId);
     void exitClass(String groupId);
 
-    void changeClassDesc(String groupId);
-    void changeClassName(String groupId);
+    void changeClassDesc(String groupId,String desc);
+    void changeClassName(String groupId,String name);
 }

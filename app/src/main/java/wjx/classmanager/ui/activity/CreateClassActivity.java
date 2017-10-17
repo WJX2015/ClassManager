@@ -96,9 +96,10 @@ public class CreateClassActivity extends BaseActivity implements CreateClassView
     }
 
     @Override
-    public void onCreateSuccess(String groupId) {
+    public void onCreateSuccess(String groupId,String objectId) {
         hideProgress();
         SPUtil.huanXinGroupId(mContext,groupId);
+        SPUtil.bmobObjectId(mContext,objectId);
         startActivity(MyClassActivity.class,CLASS_GROUP_ID,groupId);
         finish();
     }

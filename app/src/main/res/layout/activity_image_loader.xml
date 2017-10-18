@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="wjx.classmanager.ui.activity.ImageLoaderActivity">
+
+    <include layout="@layout/back_bar_layout"/>
 
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:cacheColorHint="@android:color/transparent"
         android:horizontalSpacing="3dp"
         android:listSelector="@android:color/transparent"
@@ -22,7 +25,6 @@
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:background="#ee000000"
         android:clipChildren="true">
 
@@ -47,4 +49,4 @@
             android:textColor="@android:color/white"/>
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -29,6 +29,7 @@ import wjx.classmanager.model.Message;
 import wjx.classmanager.ui.activity.CreateClassActivity;
 import wjx.classmanager.ui.activity.MainActivity;
 import wjx.classmanager.utils.GroupUtil;
+import wjx.classmanager.utils.ThreadUtil;
 
 import static wjx.classmanager.model.Constant.MessageType.CREATE_CLASS;
 
@@ -127,11 +128,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_create:
-                if (GroupUtil.isHaveGroup()){
-                    Toast.makeText(getContext(), "你已有班级了", Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent=new Intent(getContext(), CreateClassActivity.class);
-                    getContext().startActivity(intent);
+                if(mOnScanClickListener!=null) {
+                    mOnScanClickListener.onCreateClick();
                 }
                 break;
             case R.id.menu_join:
@@ -153,6 +151,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener,Pop
     public interface onScanClickListener{
         void onScanClick();
         void onJoinCLick();
+        void onCreateClick();
     }
 
     public void setOnScanClickListener(onScanClickListener onScanClickListener){

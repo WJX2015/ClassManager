@@ -92,5 +92,9 @@ public class ImageAdapter extends BaseAdapter {
         ImageView imageView;
         ImageButton imageButton;
     }
+
+    public static Set<String> getSelectedImage(){
+        return mSelectedImage;
+    }
 }
 

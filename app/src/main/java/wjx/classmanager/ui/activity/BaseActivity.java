@@ -4,11 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -152,5 +155,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(Constant.Receiver.ACTION);
         intent.putExtra(Constant.Receiver.RECEIVE,message);
         LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+    }
+
+    /**
+     * 权限检查方法
+     *
+     * @param permissions
+     * @return
+     */
+    public boolean hasPermission(String... permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 权限申请方法
+     *
+     * @param code
+     * @param permissions
+     */
+    public void requestPermission(int code, String... permissions) {
+        ActivityCompat.requestPermissions(this, permissions, code);
     }
 }

@@ -36,6 +36,7 @@ import wjx.classmanager.model.Message;
 import wjx.classmanager.presenter.MyclassPresenter;
 import wjx.classmanager.presenter.impl.MyclassPresenterImpl;
 import wjx.classmanager.utils.EaseUserUtils;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MyClassView;
 
@@ -77,8 +78,9 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
     private void init() {
         groupId = getIntent().getStringExtra(CLASS_GROUP_ID);
         if(groupId==null){
-            return;
+            return ;
         }
+
         group = EMClient.getInstance().groupManager().getGroup(groupId);
 
         if(group == null){
@@ -200,6 +202,8 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
             public void run() {
                 hideProgress();
                 showToast(s);
+                SPUtil.huanXinGroupId(mContext,"");
+                SPUtil.bmobObjectId(mContext,"");
                 finish();
             }
         });
@@ -257,7 +261,6 @@ public class MyClassActivity extends BaseActivity implements View.OnClickListene
 
             }else {
                 holder= (ViewHolder) convertView.getTag();
-
             }
 
             final LinearLayout button= (LinearLayout) convertView.findViewById(R.id.button_avatar);

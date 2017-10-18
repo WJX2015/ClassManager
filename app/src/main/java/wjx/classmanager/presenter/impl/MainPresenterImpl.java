@@ -9,9 +9,12 @@ import com.hyphenate.chat.EMClient;
 import cn.bmob.v3.BmobUser;
 import wjx.classmanager.R;
 import wjx.classmanager.presenter.MainPresenter;
+import wjx.classmanager.utils.GroupUtil;
 import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.ExitDialog;
+
+import static wjx.classmanager.model.Constant.SharePreference.H_GROUP_ID;
 
 /**
  * Created by wjx on 2017/10/5.
@@ -30,7 +33,7 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
     @Override
     public void myClass() {
         String id= SPUtil.getGroupId(mContext);
-        if(id!=null){
+        if(!id.equals("")){
             mMainView.intentMyClass(id);
         }else{
             mMainView.onError("您当前没有班级");
@@ -50,7 +53,7 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
     @Override
     public void postData() {
         String id= SPUtil.getGroupId(mContext);
-        if(id!=null){
+        if(!id.equals("")){
             mMainView.intentPostData(id);
         }else{
             mMainView.onError("您当前没有班级");
@@ -65,6 +68,12 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
     @Override
     public void unSign() {
         showAlertDialog();
+    }
+
+    @Override
+    public void loadClassInfo() {
+        GroupUtil.getInstance().searchGroupIdFromHuanXin();
+        GroupUtil.getInstance().searchObjectIdFromBmob(H_GROUP_ID,SPUtil.getGroupId(mContext));
     }
 
     private void unsignBmob(){

@@ -33,4 +33,16 @@ public class ThreadUtil {
     public static void runOnBackgroundThread(Runnable runnable){
         sExecutor.execute(runnable);
     }
+
+    /**
+     * 线程休眠
+     * @param mills
+     */
+    public static void sleep(long mills){
+        try {
+            Thread.sleep(mills);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

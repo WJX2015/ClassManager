@@ -34,6 +34,7 @@ import wjx.classmanager.ui.fragment.MessageFragment;
 import wjx.classmanager.ui.fragment.MemberFragment;
 import wjx.classmanager.presenter.impl.MainPresenterImpl;
 import wjx.classmanager.utils.GroupUtil;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.MainView;
 import wjx.classmanager.widget.SlideMenu;
@@ -49,7 +50,8 @@ import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MSG;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_NOTIFY;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, MainView, TitleBar.onScanClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener,
+        MainView, TitleBar.onScanClickListener,RadioGroup.OnCheckedChangeListener {
 
     private SlideMenu mSlideMenu;
     private TitleBar mTitleBar;
@@ -76,6 +78,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void initView() {
+        mMainPresenter = new MainPresenterImpl(this, this);
+
         //控件绑定
         mSlideMenu = (SlideMenu) findViewById(R.id.slide_menu);
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
@@ -117,8 +121,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         //默认显示消息界面
         showFragment(FRAGMENT_MSG);
-        mMainPresenter = new MainPresenterImpl(this, this);
-
         EMClient.getInstance().addConnectionListener(mEMConnectionListener);
         EMClient.getInstance().chatManager().addMessageListener(mEMMessageListener);
     }
@@ -131,23 +133,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mLeftData.setOnClickListener(this);
         mLeftInfo.setOnClickListener(this);
         mLeftUnsign.setOnClickListener(this);
-
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                switch (checkedId) {
-                    case R.id.radio_msg:
-                        showFragment(FRAGMENT_MSG);
-                        break;
-                    case R.id.radio_notify:
-                        showFragment(FRAGMENT_NOTIFY);
-                        break;
-                    case R.id.radio_manage:
-                        showFragment(FRAGMENT_MANAGE);
-                        break;
-                }
-            }
-        });
+        mRadioGroup.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -264,10 +250,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onJoinCLick() {
-        if (GroupUtil.isHaveGroup()){
+        if (!SPUtil.getGroupId(mContext).equals("")){
             showToast("你已有班级了");
         }else {
             startActivity(JoinClassActivity.class);
+        }
+    }
+
+    @Override
+    public void onCreateClick() {
+        if (!SPUtil.getGroupId(mContext).equals("")){
+            showToast("你已有班级了");
+        }else {
+            startActivity(CreateClassActivity.class);
         }
     }
 
@@ -344,4 +339,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         }
     };
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        switch (checkedId) {
+            case R.id.radio_msg:
+                showFragment(FRAGMENT_MSG);
+                break;
+            case R.id.radio_notify:
+                showFragment(FRAGMENT_NOTIFY);
+                break;
+            case R.id.radio_manage:
+                showFragment(FRAGMENT_MANAGE);
+                break;
+        }
+    }
 }

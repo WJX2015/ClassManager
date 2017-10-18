@@ -49,11 +49,16 @@ public class Constant { //常量类
         public static final String CLASS_EDIT = "class_edit";
         public static final int CLASS_NAME_CODE = 1001;
         public static final int CLASS_DESC_CODE = 1002;
+        public static final int CLASS_OPEN_CAMERA = 1003;
+        public static final int CLASS_ALBUM = 1004;
     }
 
     public static class SharePreference {
         public static final String BMOB = "bmob";
         public static final String HUAN_XIN = "huan_xin";
         public static final String CURR_USER = "curr_user";
+        public static final String H_GROUP_ID = "groupid";
+        public static final String B_OBJECT_ID = "objectd";
+
     }
 }

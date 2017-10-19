@@ -6,11 +6,9 @@ package wjx.classmanager.model;
 
 public class Constant { //常量类
 
-    //登录用户已存在
     public static class ErrorCode {
         public static final int USER_ALREADY_EXIST = 202;
         public static final String ERROR_ACTIVITY = "error_activity";
-
     }
 
     public static class FragmentType {
@@ -47,10 +45,15 @@ public class Constant { //常量类
     public static class MyClass {
         public static final String CLASS_GROUP_ID = "class_group_id";
         public static final String CLASS_EDIT = "class_edit";
+        public static final String PHOTO_SELECT = "photo_select";
         public static final int CLASS_NAME_CODE = 1001;
         public static final int CLASS_DESC_CODE = 1002;
         public static final int CLASS_OPEN_CAMERA = 1003;
         public static final int CLASS_ALBUM = 1004;
+        public static final int OPEN_ALBUM = 1005;
+        public static final int OPEN_CAMERA = 1006;
+        public static final int OPEN_STORAGE = 1007;
+        public static final int PHOTO_SELECTER = 1008;
     }
 
     public static class SharePreference {

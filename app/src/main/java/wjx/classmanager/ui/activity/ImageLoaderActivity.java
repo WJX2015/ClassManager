@@ -2,6 +2,7 @@ package wjx.classmanager.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -34,13 +35,17 @@ import cn.bmob.v3.listener.UploadBatchListener;
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.ImageAdapter;
 import wjx.classmanager.model.FolderBean;
+import wjx.classmanager.presenter.impl.ImageLoaderPresenterImpl;
+import wjx.classmanager.view.ImageLoaderView;
 import wjx.classmanager.widget.ImageDirPopupWindow;
 
 import static android.R.attr.path;
 import static com.hyphenate.chat.a.a.a.i;
 import static wjx.classmanager.adapter.ImageAdapter.getSelectedImage;
+import static wjx.classmanager.model.Constant.MyClass.CLASS_EDIT;
+import static wjx.classmanager.model.Constant.MyClass.PHOTO_SELECT;
 
-public class ImageLoaderActivity extends BaseActivity implements View.OnClickListener{
+public class ImageLoaderActivity extends BaseActivity implements View.OnClickListener,ImageLoaderView{
 
     private GridView mGridView;
     private ImageAdapter mImageAdapter;
@@ -57,6 +62,7 @@ public class ImageLoaderActivity extends BaseActivity implements View.OnClickLis
 
     private ProgressDialog mProgressDialog;
     private ImageDirPopupWindow mImageDirPopupWindow;
+    private ImageLoaderPresenterImpl mImageLoaderPresenter;
 
     private TextView mTextTitle;
     private ImageView mImageBack;
@@ -64,6 +70,7 @@ public class ImageLoaderActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initView() {
+        mImageLoaderPresenter = new ImageLoaderPresenterImpl(this);
         mGridView = (GridView) findViewById(R.id.grid_view);
         mBottomLayout = (RelativeLayout) findViewById(R.id.bottom_layout);
         mDirName = (TextView) findViewById(R.id.dir_name);
@@ -237,11 +244,9 @@ public class ImageLoaderActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.back_add:
-                Log.e( "onClick: ","click" );
                 String[] strings =mImageAdapter.getSelectedImage().toArray(new String[mImageAdapter.getSelectedImage().size()]);
-
-                postPicToBmob(getPostPicUrl(strings));
-                Log.e( "onClick: ", strings[0]+"-=-=");
+                setResult(RESULT_OK,new Intent().putExtra(PHOTO_SELECT,strings));
+                finish();
                 break;
             case R.id.bottom_layout:
                 mImageDirPopupWindow.setAnimationStyle(R.style.PopupWindowAnim);

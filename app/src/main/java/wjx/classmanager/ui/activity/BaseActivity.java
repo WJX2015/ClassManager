@@ -1,5 +1,6 @@
 package wjx.classmanager.ui.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -178,7 +179,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param code
      * @param permissions
      */
-    public void requestPermission(int code, String... permissions) {
-        ActivityCompat.requestPermissions(this, permissions, code);
+    public void requestPermission(Activity activity,int code, String... permissions) {
+        ActivityCompat.requestPermissions(activity, permissions, code);
     }
 }

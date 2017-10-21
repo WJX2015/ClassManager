@@ -49,6 +49,7 @@ import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MANAGE;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_MSG;
 import static wjx.classmanager.model.Constant.FragmentType.FRAGMENT_NOTIFY;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_GROUP_ID;
+import static wjx.classmanager.model.Constant.MyClass.SCAN_RESULT;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener,
         MainView, TitleBar.onScanClickListener,RadioGroup.OnCheckedChangeListener {
@@ -236,6 +237,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null && intentResult.getContents() != null) {
             String ScanResult = intentResult.getContents();
+            startActivity(JoinClassActivity.class,SCAN_RESULT,ScanResult);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

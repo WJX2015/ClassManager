@@ -150,6 +150,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
      */
     private void deleteMessageItem(int position){
         mMessages.remove(position);
-        notifyDataSetChanged();
+        notifyItemRemoved(position);
     }
 }

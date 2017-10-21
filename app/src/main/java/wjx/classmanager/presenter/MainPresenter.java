@@ -19,5 +19,5 @@ public interface MainPresenter {
     void unSign();
 
     void loadClassInfo();
-    
+
 }

@@ -42,6 +42,9 @@ public class SlideMenu extends HorizontalScrollView {
     private final int VELOCITY_OPEN = 300;
     private final int VELOCITY_CLOSE = -300;
 
+    private boolean isFirst =true;
+    private int ORIENTATION_V=-1;
+
     public SlideMenu(Context context) {
         //在代码中直接New一个对象的时候调用
         this(context, null);
@@ -235,11 +238,25 @@ public class SlideMenu extends HorizontalScrollView {
             case MotionEvent.ACTION_MOVE:
                 int dX= (int) (ev.getX()-startX);
                 int dY= (int) (ev.getY()-startY);
-                if(Math.abs(dX)/2<Math.abs(dY)){
-                    return false;
+
+                if(isFirst){
+                    if(Math.abs(dX)/2<Math.abs(dY)){
+                        ORIENTATION_V=1;
+                    }
+                    isFirst=false;
                 }
+
+                break;
+            case MotionEvent.ACTION_UP:
+                ORIENTATION_V=-1;
+                isFirst=true;
                 break;
         }
+
+        if(ORIENTATION_V!=-1){
+            return false;
+        }
+
         return super.onInterceptTouchEvent(ev);
     }
 

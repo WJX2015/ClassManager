@@ -14,4 +14,8 @@ public interface ClassPhotoView {
     void onPicPostSuccess(List<String> urls);
 
     void onStartLoadPic(String s);
+
+    void onDownPicSuccess(String path);
+
+    void onDownPicFailed(String message);
 }

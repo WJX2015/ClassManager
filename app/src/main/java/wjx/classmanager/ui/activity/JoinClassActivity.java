@@ -12,6 +12,8 @@ import wjx.classmanager.adapter.JoinClassAdapter;
 import wjx.classmanager.presenter.impl.JoinClassPresenterImpl;
 import wjx.classmanager.view.JoinClassView;
 
+import static wjx.classmanager.model.Constant.MyClass.SCAN_RESULT;
+
 public class JoinClassActivity extends BaseActivity implements View.OnClickListener,JoinClassView{
 
     private ImageView mImageBack;
@@ -24,12 +26,12 @@ public class JoinClassActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView() {
+        mJoinClassPresenter = new JoinClassPresenterImpl(this);
         mImageBack = (ImageView) findViewById(R.id.back_image);
         mImageSearch = (ImageView) findViewById(R.id.join_search);
         mTextTitle = (TextView) findViewById(R.id.back_title);
         mEditClass = (EditText) findViewById(R.id.join_input);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_join);
-        mJoinClassPresenter = new JoinClassPresenterImpl(this);
         mJoinClassAdapter = new JoinClassAdapter(mJoinClassPresenter.getJoinClassList());
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(manager);
@@ -72,5 +74,15 @@ public class JoinClassActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onStartSearch() {
         showProgress("努力查找中...");
+    }
+
+    /**
+     * 是否有数据传过来
+     */
+    private void initIntentData(){
+        String groupId=getIntent().getStringExtra(SCAN_RESULT);
+        if(groupId!=null){
+            mJoinClassPresenter.searchClassFromServer(groupId);
+        }
     }
 }

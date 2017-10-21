@@ -38,12 +38,6 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.ManageView
     @Override
     public void onBindViewHolder(ManageViewHolder holder, final int position) {
         holder.mManageItemView.bindView(mContext,mManages.get(position));
-        holder.mManageItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override

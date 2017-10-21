@@ -39,7 +39,7 @@ public class JoinClassPresenterImpl implements JoinClassPresenter {
         ThreadUtil.runOnBackgroundThread(new Runnable() {
             @Override
             public void run() {
-//                EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);//需异步处理
+//                EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer();//需异步处理
 //                List<EMGroupInfo> groupsList = List<EMGroupInfo> returnGroups = result.getData();
 //                String cursor = result.getCursor();
             }
@@ -48,5 +48,14 @@ public class JoinClassPresenterImpl implements JoinClassPresenter {
 
     public List<JoinClass> getJoinClassList(){
         return mJoinClasses;
+    }
+
+    private void notifySearchSuccess(){
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //mJoinClassView.onSearchSuccess();
+            }
+        });
     }
 }

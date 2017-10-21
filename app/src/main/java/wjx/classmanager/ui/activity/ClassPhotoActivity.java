@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
@@ -166,13 +167,8 @@ public class ClassPhotoActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onPicPostSuccess(final String fileUrl) {
         Log.e( "onPicPostSuccess: ",fileUrl+"" );
-        post(new Runnable() {
-            @Override
-            public void run() {
-                mClassPhotoAdapter.addPhoto(new ClassPhoto(fileUrl));
-            }
-        });
-        hideProgress();
+        File name=getExternalCacheDir();
+        mClassPhotoPresenter.downloadPicFromBmob(name,fileUrl);
     }
 
     @Override
@@ -189,6 +185,23 @@ public class ClassPhotoActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onStartLoadPic(String s) {
         showProgress(s);
+    }
+
+    @Override
+    public void onDownPicSuccess(final String path) {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                mClassPhotoAdapter.addPhoto(new ClassPhoto(path));
+            }
+        });
+        hideProgress();
+    }
+
+    @Override
+    public void onDownPicFailed(String message) {
+        hideProgress();
+        showToast(message);
     }
 
     @Override

@@ -46,6 +46,7 @@ public class Constant { //常量类
         public static final String CLASS_GROUP_ID = "class_group_id";
         public static final String CLASS_EDIT = "class_edit";
         public static final String PHOTO_SELECT = "photo_select";
+        public static final String SCAN_RESULT = "scan_result";
         public static final int CLASS_NAME_CODE = 1001;
         public static final int CLASS_DESC_CODE = 1002;
         public static final int CLASS_OPEN_CAMERA = 1003;

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -18,12 +20,15 @@ import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.UploadBatchListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import wjx.classmanager.model.ClassPhoto;
 import wjx.classmanager.presenter.ClassPhotoPresenter;
 import wjx.classmanager.utils.LogUtil;
 import wjx.classmanager.view.ClassPhotoView;
+
+import static android.R.attr.path;
 
 /**
  * Created by wjx on 2017/10/18.
@@ -127,6 +132,29 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
     public void handleSelectorImage(String[] stringExtra) {
         mClassPhotoView.onStartLoadPic("正在上传图片...");
         postPicToBmob(stringExtra);
+    }
+
+    @Override
+    public void downloadPicFromBmob(File name,String fileUrl) {
+        BmobFile bmobfile =new BmobFile("download.png","",fileUrl);
+        bmobfile.download(new DownloadFileListener() {
+            @Override
+            public void done(String path, BmobException e) {
+                if(e==null){
+                    mClassPhotoView.onDownPicSuccess(path);
+                    Log.e("done: ",path+"-=-=" );
+                }else{
+                    mClassPhotoView.onDownPicFailed(e.getMessage());
+                    Log.e( "done: ",e.getErrorCode()+"-=-="+e.getMessage() );
+                }
+
+            }
+
+            @Override
+            public void onProgress(Integer integer, long l) {
+
+            }
+        });
     }
 
     public List<ClassPhoto> getPicList(){

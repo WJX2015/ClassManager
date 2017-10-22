@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import wjx.classmanager.model.ClassPhoto;
+import wjx.classmanager.model.BmobPhoto;
 import wjx.classmanager.widget.ClassPhotoItemView;
 
 /**
@@ -16,10 +16,10 @@ import wjx.classmanager.widget.ClassPhotoItemView;
 
 public class ClassPhotoAdapter extends RecyclerView.Adapter<ClassPhotoAdapter.ClassPhotoViewHolder> {
 
-    private List<ClassPhoto> mClassPhotos = new ArrayList<>();
+    private List<BmobPhoto> mClassPhotos = new ArrayList<>();
     private Context mContext;
 
-    public ClassPhotoAdapter(List<ClassPhoto> classPhotos){
+    public ClassPhotoAdapter(List<BmobPhoto> classPhotos){
         mClassPhotos=classPhotos;
     }
 
@@ -49,7 +49,7 @@ public class ClassPhotoAdapter extends RecyclerView.Adapter<ClassPhotoAdapter.Cl
         }
     }
 
-    public void addPhoto(ClassPhoto classPhoto){
+    public void addPhoto(BmobPhoto classPhoto){
         mClassPhotos.add(0,classPhoto);
         notifyItemInserted(0);
     }

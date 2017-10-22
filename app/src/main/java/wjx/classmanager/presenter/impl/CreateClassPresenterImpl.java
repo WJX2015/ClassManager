@@ -78,7 +78,7 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
                     //在环信创建群组
                     EMClient.getInstance().groupManager().createGroup(className, classDesc, members, reason, option);
                     //在Bmob创建班级表
-                    createTableInBmob(className,classDesc, BmobUser.getCurrentUser().getUsername());
+                    createTableInBmob(className,classDesc, BmobUser.getCurrentUser());
                 } catch (HyphenateException e) {
                     //通知view创建班级失败
                     ThreadUtil.runOnUiThread(new Runnable() {
@@ -114,12 +114,12 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
         return "";
     }
 
-    private void createTableInBmob(String classname,String classdesc,String currusername) {
+    private void createTableInBmob(String classname,String classdesc,BmobUser user) {
         final String groupId=huanXinGroupId(classname);
         BmobClass bmobClass = new BmobClass();
         bmobClass.setClassname(classname);
         bmobClass.setDescription(classdesc);
-        bmobClass.setUsername(currusername);
+        bmobClass.setUsername(BmobUser.getCurrentUser());
         bmobClass.setGroupid(groupId);
         bmobClass.save(new SaveListener<String>() {
             @Override

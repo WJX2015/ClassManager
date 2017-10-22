@@ -63,6 +63,7 @@ public class Constant { //常量类
         public static final String CURR_USER = "curr_user";
         public static final String H_GROUP_ID = "groupid";
         public static final String B_OBJECT_ID = "objectd";
+        public static final String CACHE_LIST = "cache_list";
 
     }
 }

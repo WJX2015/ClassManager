@@ -19,4 +19,6 @@ public interface MainView {
     void onError(String error);
 
     void intentPostData(String id);
+
+    void intentPersonalInfo(String id);
 }

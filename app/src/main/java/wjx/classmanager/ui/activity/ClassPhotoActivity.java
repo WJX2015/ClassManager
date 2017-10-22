@@ -1,21 +1,15 @@
 package wjx.classmanager.ui.activity;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -29,11 +23,10 @@ import java.util.List;
 
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.ClassPhotoAdapter;
-import wjx.classmanager.model.ClassPhoto;
+import wjx.classmanager.model.BmobPhoto;
 import wjx.classmanager.presenter.impl.ClassPhotoPresenterImpl;
 import wjx.classmanager.view.ClassPhotoView;
 
-import static android.R.attr.path;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_ALBUM;
 import static wjx.classmanager.model.Constant.MyClass.CLASS_OPEN_CAMERA;
 import static wjx.classmanager.model.Constant.MyClass.OPEN_ALBUM;
@@ -165,10 +158,10 @@ public class ClassPhotoActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void onPicPostSuccess(final String fileUrl) {
-        Log.e( "onPicPostSuccess: ",fileUrl+"" );
-        File name=getExternalCacheDir();
-        mClassPhotoPresenter.downloadPicFromBmob(name,fileUrl);
+    public void onPicPostSuccess(final String obejctId) {
+        Log.e( "onPicPostSuccess: ",obejctId+"" );
+        mClassPhotoPresenter.updatePhotoList(obejctId);
+        hideProgress();
     }
 
     @Override
@@ -188,19 +181,12 @@ public class ClassPhotoActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void onDownPicSuccess(final String path) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                mClassPhotoAdapter.addPhoto(new ClassPhoto(path));
-            }
-        });
-        hideProgress();
+    public void onUpdatePhotoSuccess(BmobPhoto photo) {
+        mClassPhotoAdapter.addPhoto(photo);
     }
 
     @Override
-    public void onDownPicFailed(String message) {
-        hideProgress();
+    public void onUpdatePhotoFailed(String message) {
         showToast(message);
     }
 

@@ -2,12 +2,14 @@ package wjx.classmanager.view;
 
 import java.util.List;
 
+import wjx.classmanager.model.BmobPhoto;
+
 /**
  * Created by wjx on 2017/10/18.
  */
 
 public interface ClassPhotoView {
-    void onPicPostSuccess(String fileUrl);
+    void onPicPostSuccess(String objectId);
 
     void onPicPostFailed(String message);
 
@@ -15,7 +17,7 @@ public interface ClassPhotoView {
 
     void onStartLoadPic(String s);
 
-    void onDownPicSuccess(String path);
+    void onUpdatePhotoSuccess(BmobPhoto photo);
 
-    void onDownPicFailed(String message);
+    void onUpdatePhotoFailed(String message);
 }

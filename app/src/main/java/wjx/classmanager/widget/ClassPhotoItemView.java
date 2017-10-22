@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import wjx.classmanager.R;
-import wjx.classmanager.model.ClassPhoto;
+import wjx.classmanager.model.BmobPhoto;
 
 /**
  * Created by wjx on 2017/10/18.
@@ -37,8 +37,8 @@ public class ClassPhotoItemView extends RelativeLayout {
         mTextView = (TextView) view.findViewById(R.id.item_url);
     }
 
-    public void bindView(Context context,ClassPhoto classPhoto){
-        Glide.with(context).load(classPhoto.getUrl()).into(mImageView);
-        mTextView.setText(classPhoto.getUrl());
+    public void bindView(Context context,BmobPhoto bmobPhoto){
+        Glide.with(context).load(bmobPhoto.getUrl()).into(mImageView);
+        mTextView.setText(bmobPhoto.getUrl());
     }
 }

@@ -4,14 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
-import java.io.File;
-import java.util.List;
-
-import wjx.classmanager.model.ClassPhoto;
-import wjx.classmanager.ui.activity.ClassPhotoActivity;
-
-import static android.R.attr.data;
-
 /**
  * Created by wjx on 2017/10/18.
  */
@@ -22,5 +14,6 @@ public interface ClassPhotoPresenter {
     void handleCameraImage(Activity activity, Uri imageUri);
 
     void handleSelectorImage(String[] stringExtra);
-    void downloadPicFromBmob(File name, String url);
+
+    void updatePhotoList(String obejctId);
 }

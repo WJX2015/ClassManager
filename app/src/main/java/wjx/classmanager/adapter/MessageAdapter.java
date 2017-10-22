@@ -80,10 +80,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void addMessageItem(Message message) {
         if (checkMessageType(message.getType())) {
             mMessages.remove(mMessagePosition);
+            notifyItemRemoved(mMessagePosition);
+
         }
         message.setCount(++mMessageLastCount);
         mMessages.add(0, message);
-        notifyDataSetChanged();
+        notifyItemInserted(0);
     }
 
     /**
@@ -140,8 +142,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private void updateMessageItem(int position) {
         Message message = mMessages.get(position);
         mMessages.remove(position);
+        notifyItemRemoved(position);
         mMessages.add(0, message);
-        notifyDataSetChanged();
+        notifyItemInserted(0);
     }
 
     /**

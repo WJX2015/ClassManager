@@ -16,7 +16,6 @@ import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.LogInView;
 
 import static wjx.classmanager.model.Constant.SharePreference.CURR_USER;
-import static wjx.classmanager.utils.SPUtil.getCurrUser;
 
 /**
  * Created by wjx on 2017/9/26.
@@ -104,12 +103,12 @@ public class LoginPresenterImpl implements LoginPrestener {
     }
 
     private void checkUserInfo() {
-        String lastUser = SPUtil.getCurrUser(MyApplication.getMyContext(), CURR_USER);
+        String lastUser = SPUtil.getCache(MyApplication.getMyContext(), CURR_USER);
         String currUser = BmobUser.getCurrentUser().getUsername();
         if (!lastUser.equals(currUser)) {
             SPUtil.clearHuanXin(MyApplication.getMyContext());
             SPUtil.clearBmob(MyApplication.getMyContext());
-            SPUtil.setCurrUser(MyApplication.getMyContext(), CURR_USER, currUser);
+            SPUtil.cache(MyApplication.getMyContext(), CURR_USER, currUser);
         }
     }
 }

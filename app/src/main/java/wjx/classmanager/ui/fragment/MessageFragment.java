@@ -8,6 +8,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.MessageAdapter;

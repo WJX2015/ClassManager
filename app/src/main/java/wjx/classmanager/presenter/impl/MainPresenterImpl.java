@@ -62,7 +62,12 @@ public class MainPresenterImpl implements MainPresenter,ExitDialog.onPositiveBut
 
     @Override
     public void personalInfo() {
-
+        String id= SPUtil.getGroupId(mContext);
+        if(!id.equals("")){
+            mMainView.intentPersonalInfo(id);
+        }else{
+            mMainView.onError("您当前没有班级");
+        }
     }
 
     @Override

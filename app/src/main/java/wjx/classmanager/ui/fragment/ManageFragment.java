@@ -9,6 +9,8 @@ import android.text.Spanned;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +22,12 @@ import wjx.classmanager.adapter.ManageAdapter;
 import wjx.classmanager.listener.RecyclerItemClickListener;
 import wjx.classmanager.model.Manage;
 import wjx.classmanager.presenter.impl.ManagePresenterImpl;
+import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.ManageView;
+
+import static cn.bmob.v3.helper.GsonUtil.toJson;
+import static com.hyphenate.chat.a.a.a.g;
+import static wjx.classmanager.model.Constant.SharePreference.CACHE_LIST;
 
 /**
  * Created by wjx on 2017/9/16.
@@ -137,5 +144,16 @@ public class ManageFragment extends BaseFragment implements ManageView{
             }
         });
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+    }
+
+    @Override
+    public void onDestroy() {
+        cacheList();
+        super.onDestroy();
+    }
+
+    private void cacheList() {
+        Gson gson =new Gson();
+        SPUtil.cache(mContext,CACHE_LIST,gson.toJson(mManages));
     }
 }

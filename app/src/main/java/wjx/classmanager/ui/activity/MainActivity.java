@@ -233,6 +233,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
+    public void intentPersonalInfo(String id) {
+        startActivity(PerosonalActivity.class);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null && intentResult.getContents() != null) {

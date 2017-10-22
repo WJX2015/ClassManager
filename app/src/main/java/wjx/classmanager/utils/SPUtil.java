@@ -12,7 +12,7 @@ import static wjx.classmanager.model.Constant.SharePreference.HUAN_XIN;
  */
 
 public class SPUtil {
-    private static final String KEY="first";
+    private static final String KEY = "first";
 
     /**
      * @param context 获取导航页上下文
@@ -30,7 +30,7 @@ public class SPUtil {
      * @param context
      * @param isFirst
      */
-    public static void addFirstRunTag(Context context,boolean isFirst) {
+    public static void addFirstRunTag(Context context, boolean isFirst) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(KEY, isFirst);
@@ -39,10 +39,11 @@ public class SPUtil {
 
     /**
      * 存放环信字段
+     *
      * @param context
      * @param groupId
      */
-    public static void huanXinGroupId(Context context,String groupId){
+    public static void huanXinGroupId(Context context, String groupId) {
         SharedPreferences sp = context.getSharedPreferences(HUAN_XIN, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(HUAN_XIN, groupId);
@@ -51,20 +52,22 @@ public class SPUtil {
 
     /**
      * 获取群组Id
+     *
      * @param context
      * @return
      */
-    public static String getGroupId(Context context){
+    public static String getGroupId(Context context) {
         SharedPreferences sp = context.getSharedPreferences(HUAN_XIN, Context.MODE_PRIVATE);
-        return sp.getString(HUAN_XIN,"");
+        return sp.getString(HUAN_XIN, "");
     }
 
     /**
      * 存放比目字段
+     *
      * @param context
      * @param objectId
      */
-    public static void bmobObjectId(Context context,String objectId){
+    public static void bmobObjectId(Context context, String objectId) {
         SharedPreferences sp = context.getSharedPreferences(BMOB, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(BMOB, objectId);
@@ -73,19 +76,21 @@ public class SPUtil {
 
     /**
      * 获取班级表的Id
+     *
      * @param context
      * @return
      */
-    public static String getObjectId(Context context){
+    public static String getObjectId(Context context) {
         SharedPreferences sp = context.getSharedPreferences(BMOB, Context.MODE_PRIVATE);
-        return sp.getString(BMOB,"");
+        return sp.getString(BMOB, "");
     }
 
     /**
      * 清理环信缓存字段
+     *
      * @param context
      */
-    public static void clearHuanXin(Context context){
+    public static void clearHuanXin(Context context) {
         SharedPreferences sp = context.getSharedPreferences(HUAN_XIN, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
@@ -94,9 +99,10 @@ public class SPUtil {
 
     /**
      * 清理Bmob缓存字段
+     *
      * @param context
      */
-    public static void clearBmob(Context context){
+    public static void clearBmob(Context context) {
         SharedPreferences sp = context.getSharedPreferences(BMOB, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
@@ -104,11 +110,10 @@ public class SPUtil {
     }
 
     /**
-     * 缓存当前用户名
      * @param context
      * @param user
      */
-    public static void setCurrUser(Context context,String key,String user){
+    public static void cache(Context context, String key, String user) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(key, user);
@@ -116,14 +121,13 @@ public class SPUtil {
     }
 
     /**
-     * 获取当前用户名
      * @param context
      * @param key
      * @return
      */
-    public static String getCurrUser(Context context,String key){
+    public static String getCache(Context context, String key) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        return sp.getString(key,"");
+        return sp.getString(key, "");
     }
 
     /**
@@ -153,32 +157,5 @@ public class SPUtil {
         SharedPreferences sp = context.getSharedPreferences(type + "", Context.MODE_PRIVATE);
         String newsDatas = sp.getString(newsKey, null);
         return newsDatas;
-    }
-
-    /**
-     * 缓存笑话数据
-     *
-     * @param context
-     * @param jokesKey
-     * @param jokesDatas
-     */
-    public static void cacheJokesDatas(Context context, String jokesKey, String jokesDatas) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(jokesKey, jokesDatas);
-        editor.commit();
-    }
-
-    /**
-     * 获取笑话数据
-     *
-     * @param context
-     * @param jokesKey
-     * @return
-     */
-    public static String getJokesDatas(Context context, String jokesKey) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String str = sp.getString(jokesKey, null);
-        return str;
     }
 }

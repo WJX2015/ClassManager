@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.os.SystemClock;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -18,17 +16,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.DownloadFileListener;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadBatchListener;
 import cn.bmob.v3.listener.UploadFileListener;
-import wjx.classmanager.model.ClassPhoto;
+import wjx.classmanager.model.BmobClass;
+import wjx.classmanager.model.BmobPhoto;
 import wjx.classmanager.presenter.ClassPhotoPresenter;
-import wjx.classmanager.utils.LogUtil;
 import wjx.classmanager.view.ClassPhotoView;
-
-import static android.R.attr.path;
 
 /**
  * Created by wjx on 2017/10/18.
@@ -37,7 +36,7 @@ import static android.R.attr.path;
 public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
 
     private ClassPhotoView mClassPhotoView;
-    private List<ClassPhoto> mClassPhotos = new ArrayList<>();
+    private List<BmobPhoto> mClassPhotos = new ArrayList<>();
 
     public ClassPhotoPresenterImpl(ClassPhotoView classPhotoView){
         mClassPhotoView=classPhotoView;
@@ -46,8 +45,7 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
 
     private void initData() {
         for(int i=0;i<5;i++){
-            String url="/storage/emulated/0/BigNoxHD/cache/com_bignox_app_store_hd.png";
-            mClassPhotos.add(new ClassPhoto(url));
+            mClassPhotos.add(new BmobPhoto());
         }
     }
 
@@ -62,7 +60,7 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
             @Override
             public void done(BmobException e) {
                 if(e==null){
-                    mClassPhotoView.onPicPostSuccess(bmobFile.getFileUrl());
+                    saveInBmobPhoto(bmobFile.getUrl());
                 }else{
                     mClassPhotoView.onPicPostFailed(e.getMessage());
                 }
@@ -71,6 +69,29 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
             @Override
             public void onProgress(Integer value) {
                 // 返回的上传进度（百分比）
+            }
+        });
+    }
+
+    /**
+     * 保存到相册表
+     * @param url
+     */
+    private void saveInBmobPhoto(String url) {
+        BmobPhoto photo = new BmobPhoto();
+        photo.setUrl(url);
+        photo.setUser(BmobUser.getCurrentUser());
+        photo.save(new SaveListener<String>() {
+
+            @Override
+            public void done(String objectId,BmobException e) {
+                if(e==null){
+                    Log.i("bmob","保存成功");
+                    mClassPhotoView.onPicPostSuccess(objectId);
+                }else{
+                    Log.i("bmob","保存失败："+e.getMessage());
+                    mClassPhotoView.onPicPostFailed(e.getMessage());
+                }
             }
         });
     }
@@ -135,29 +156,26 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
     }
 
     @Override
-    public void downloadPicFromBmob(File name,String fileUrl) {
-        BmobFile bmobfile =new BmobFile("download.png","",fileUrl);
-        bmobfile.download(new DownloadFileListener() {
+    public void updatePhotoList(String obejctId) {
+        BmobQuery<BmobPhoto> query = new BmobQuery<BmobPhoto>();
+        query.getObject(obejctId, new QueryListener<BmobPhoto>() {
+
             @Override
-            public void done(String path, BmobException e) {
+            public void done(BmobPhoto object, BmobException e) {
                 if(e==null){
-                    mClassPhotoView.onDownPicSuccess(path);
-                    Log.e("done: ",path+"-=-=" );
+                    BmobPhoto photo = new BmobPhoto();
+                    photo.setUser(object.getUser());
+                    photo.setUrl(object.getUrl());
+                    photo.setDate(object.getCreatedAt());
+                    mClassPhotoView.onUpdatePhotoSuccess(photo);
                 }else{
-                    mClassPhotoView.onDownPicFailed(e.getMessage());
-                    Log.e( "done: ",e.getErrorCode()+"-=-="+e.getMessage() );
+                    mClassPhotoView.onUpdatePhotoFailed(e.getMessage());
                 }
-
-            }
-
-            @Override
-            public void onProgress(Integer integer, long l) {
-
             }
         });
     }
 
-    public List<ClassPhoto> getPicList(){
+    public List<BmobPhoto> getPicList(){
         return mClassPhotos;
     }
 

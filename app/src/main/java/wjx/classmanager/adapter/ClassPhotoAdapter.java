@@ -2,13 +2,14 @@ package wjx.classmanager.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import wjx.classmanager.model.BmobPhoto;
-import wjx.classmanager.widget.ClassPhotoItemView;
+import wjx.classmanager.widget.BmobPhotoItemView;
 
 /**
  * Created by wjx on 2017/10/18.
@@ -26,12 +27,12 @@ public class ClassPhotoAdapter extends RecyclerView.Adapter<ClassPhotoAdapter.Cl
     @Override
     public ClassPhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext =parent.getContext();
-        return new ClassPhotoViewHolder(new ClassPhotoItemView(mContext));
+        return new ClassPhotoViewHolder(new BmobPhotoItemView(mContext));
     }
 
     @Override
     public void onBindViewHolder(ClassPhotoViewHolder holder, int position) {
-        holder.mClassPhotoItemView.bindView(mContext,mClassPhotos.get(position));
+        holder.mBmobPhotoItemView.bindView(mContext,mClassPhotos.get(position));
     }
 
     @Override
@@ -41,16 +42,17 @@ public class ClassPhotoAdapter extends RecyclerView.Adapter<ClassPhotoAdapter.Cl
 
     class ClassPhotoViewHolder extends RecyclerView.ViewHolder{
 
-        private ClassPhotoItemView mClassPhotoItemView;
+        private BmobPhotoItemView mBmobPhotoItemView;
 
-        public ClassPhotoViewHolder(ClassPhotoItemView itemView) {
+        public ClassPhotoViewHolder(BmobPhotoItemView itemView) {
             super(itemView);
-            mClassPhotoItemView =itemView;
+            mBmobPhotoItemView =itemView;
         }
     }
 
     public void addPhoto(BmobPhoto classPhoto){
         mClassPhotos.add(0,classPhoto);
+        Log.e( "addPhoto: ",classPhoto.getUrl() + "=-="+classPhoto.getDate() );
         notifyItemInserted(0);
     }
 }

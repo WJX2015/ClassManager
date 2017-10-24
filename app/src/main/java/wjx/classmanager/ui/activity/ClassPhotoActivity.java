@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import wjx.classmanager.R;
@@ -48,9 +49,13 @@ public class ClassPhotoActivity extends BaseActivity implements View.OnClickList
     private Uri imageUri;
     private File mOutputImage;
     private ClassPhotoPresenterImpl mClassPhotoPresenter;
+    private List<BmobPhoto> mBmobPhotos=new ArrayList<>();
 
     @Override
     public void initView() {
+        BmobPhoto photo = new BmobPhoto();
+        photo.setUrl("http://bmob-cdn-14587.b0.upaiyun.com/2017/10/22/dfe20a3eb4334977a132ad2e4e961a45.png");
+        mBmobPhotos.add(photo);
         mClassPhotoPresenter = new ClassPhotoPresenterImpl(this);
         mTakePhoto = (Button) findViewById(R.id.take_photo);
         mAlbumPhoto = (Button) findViewById(R.id.album_photo);
@@ -58,7 +63,7 @@ public class ClassPhotoActivity extends BaseActivity implements View.OnClickList
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_photo);
         GridLayoutManager manager = new GridLayoutManager(mContext,3);
         mRecyclerView.setLayoutManager(manager);
-        mClassPhotoAdapter = new ClassPhotoAdapter(mClassPhotoPresenter.getPicList());
+        mClassPhotoAdapter = new ClassPhotoAdapter(new ArrayList<BmobPhoto>());
         mRecyclerView.setAdapter(mClassPhotoAdapter);
         mImageBack = (ImageView) findViewById(R.id.back_image);
         mTextTitle = (TextView) findViewById(R.id.back_title);

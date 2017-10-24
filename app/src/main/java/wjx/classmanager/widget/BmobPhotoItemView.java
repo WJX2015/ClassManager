@@ -14,31 +14,31 @@ import wjx.classmanager.R;
 import wjx.classmanager.model.BmobPhoto;
 
 /**
- * Created by wjx on 2017/10/18.
+ * Created by wjx on 2017/10/22.
  */
 
-public class ClassPhotoItemView extends RelativeLayout {
+public class BmobPhotoItemView extends RelativeLayout {
 
-    private ImageView mImageView;
     private TextView mTextView;
+    private ImageView mImageView;
 
-    public ClassPhotoItemView(Context context) {
+    public BmobPhotoItemView(Context context) {
         this(context,null);
     }
 
-    public ClassPhotoItemView(Context context, AttributeSet attrs) {
+    public BmobPhotoItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context);
+        initData(context);
     }
 
-    private void initView(Context context) {
+    private void initData(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_class_pic,this);
-        mImageView = (ImageView) view.findViewById(R.id.item_pic);
         mTextView = (TextView) view.findViewById(R.id.item_url);
+        mImageView = (ImageView) view.findViewById(R.id.item_pic);
     }
 
     public void bindView(Context context,BmobPhoto bmobPhoto){
-        Glide.with(context).load(bmobPhoto.getUrl()).into(mImageView);
         mTextView.setText(bmobPhoto.getUrl());
+        Glide.with(context).load(bmobPhoto.getUrl()).into(mImageView);
     }
 }

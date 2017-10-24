@@ -36,17 +36,9 @@ import wjx.classmanager.view.ClassPhotoView;
 public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
 
     private ClassPhotoView mClassPhotoView;
-    private List<BmobPhoto> mClassPhotos = new ArrayList<>();
 
     public ClassPhotoPresenterImpl(ClassPhotoView classPhotoView){
         mClassPhotoView=classPhotoView;
-        initData();
-    }
-
-    private void initData() {
-        for(int i=0;i<5;i++){
-            mClassPhotos.add(new BmobPhoto());
-        }
     }
 
     /**
@@ -80,6 +72,7 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
     private void saveInBmobPhoto(String url) {
         BmobPhoto photo = new BmobPhoto();
         photo.setUrl(url);
+        Log.e( "saveInBmobPhoto: ", url);
         photo.setUser(BmobUser.getCurrentUser());
         photo.save(new SaveListener<String>() {
 
@@ -166,6 +159,7 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
                     BmobPhoto photo = new BmobPhoto();
                     photo.setUser(object.getUser());
                     photo.setUrl(object.getUrl());
+                    Log.e( "done: ", object.getUrl());
                     photo.setDate(object.getCreatedAt());
                     mClassPhotoView.onUpdatePhotoSuccess(photo);
                 }else{
@@ -173,10 +167,6 @@ public class ClassPhotoPresenterImpl implements ClassPhotoPresenter {
                 }
             }
         });
-    }
-
-    public List<BmobPhoto> getPicList(){
-        return mClassPhotos;
     }
 
     /**

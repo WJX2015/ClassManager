@@ -30,6 +30,7 @@ public class SplashActivity extends BaseActivity implements SplashView{
                     long start = System.currentTimeMillis();
                     EMClient.getInstance().chatManager().loadAllConversations();
                     EMClient.getInstance().groupManager().loadAllGroups();
+
                     long costTime = System.currentTimeMillis() - start;
                     if(SLEEP_TIME-costTime>0){
                         Thread.sleep(SLEEP_TIME-costTime);

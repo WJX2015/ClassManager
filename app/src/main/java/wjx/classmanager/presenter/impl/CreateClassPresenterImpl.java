@@ -17,8 +17,6 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import wjx.classmanager.model.BmobClass;
 import wjx.classmanager.presenter.CreateClassPresenter;
-import wjx.classmanager.ui.activity.MyClassActivity;
-import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.utils.ThreadUtil;
 import wjx.classmanager.view.CreateClassView;
 
@@ -119,7 +117,7 @@ public class CreateClassPresenterImpl implements CreateClassPresenter {
         BmobClass bmobClass = new BmobClass();
         bmobClass.setClassname(classname);
         bmobClass.setDescription(classdesc);
-        bmobClass.setUsername(BmobUser.getCurrentUser());
+        bmobClass.setUser(BmobUser.getCurrentUser());
         bmobClass.setGroupid(groupId);
         bmobClass.save(new SaveListener<String>() {
             @Override

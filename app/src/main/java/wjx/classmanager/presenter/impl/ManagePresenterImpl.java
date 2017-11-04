@@ -11,6 +11,9 @@ import wjx.classmanager.R;
 import wjx.classmanager.application.MyApplication;
 import wjx.classmanager.model.Manage;
 import wjx.classmanager.presenter.ManagePresenter;
+import wjx.classmanager.ui.activity.CreateEvaActivity;
+import wjx.classmanager.ui.activity.CreateNotifyActivity;
+import wjx.classmanager.ui.activity.CreateVoteActivity;
 import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.ManageView;
 
@@ -39,20 +42,30 @@ public class ManagePresenterImpl implements ManagePresenter {
     }
 
     private void initData() {
-        if (!SPUtil.getCache(MyApplication.getMyContext(), CACHE_LIST).equals("")) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<Manage>>() {
-            }.getType();
-            mManages = gson.fromJson(SPUtil.getCache(MyApplication.getMyContext(), CACHE_LIST), type);
-        } else {
+//        if (!SPUtil.getCache(MyApplication.getMyContext(), CACHE_LIST).equals("")) {
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<List<Manage>>() {
+//            }.getType();
+//            mManages = gson.fromJson(SPUtil.getCache(MyApplication.getMyContext(), CACHE_LIST), type);
+//        } else {
             for (int i = 0; i < mFunctionTitle.length; i++) {
                 mManages.add(new Manage(mFunctionIcon[i], mFunctionTitle[i]));
             }
-        }
+//        }
     }
 
     public List<Manage> getManageList() {
         return mManages;
     }
 
+    @Override
+    public void checkItemType(String title) {
+        if(title.equals("发布通知")){
+            mManageView.start(CreateNotifyActivity.class);
+        }else if(title.equals("活动投票")){
+            mManageView.start(CreateVoteActivity.class);
+        }else if(title.equals("推优评优")){
+            mManageView.start(CreateEvaActivity.class);
+        }
+    }
 }

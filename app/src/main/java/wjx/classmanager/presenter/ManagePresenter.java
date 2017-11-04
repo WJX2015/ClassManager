@@ -5,4 +5,5 @@ package wjx.classmanager.presenter;
  */
 
 public interface ManagePresenter {
+    void checkItemType(String title);
 }

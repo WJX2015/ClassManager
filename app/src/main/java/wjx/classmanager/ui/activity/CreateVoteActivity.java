@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import wjx.classmanager.R;
 
-public class EvaNextActivity extends BaseActivity implements View.OnClickListener{
+public class CreateVoteActivity extends BaseActivity implements View.OnClickListener{
 
     private ImageView mImageBack;
     private TextView mTextTitle;
@@ -18,34 +18,34 @@ public class EvaNextActivity extends BaseActivity implements View.OnClickListene
     private EditText mEditName;
     private EditText mEditDesc;
     private EditText mEditPerson;
-    private Button mNextAdd;
+    private Button mBtnNext;
 
     @Override
     public void initView() {
         mImageBack = (ImageView) findViewById(R.id.back_image);
         mTextTitle = (TextView) findViewById(R.id.back_title);
         mImageAdd = (ImageView) findViewById(R.id.back_add);
-        mEditName = (EditText) findViewById(R.id.next_name);
-        mEditDesc = (EditText) findViewById(R.id.next_desc);
-        mEditPerson = (EditText) findViewById(R.id.next_person);
-        mNextAdd = (Button) findViewById(R.id.next_next);
+        mEditName = (EditText) findViewById(R.id.vote_name);
+        mEditDesc = (EditText) findViewById(R.id.vote_desc);
+        mEditPerson = (EditText) findViewById(R.id.vote_person);
+        mBtnNext = (Button) findViewById(R.id.vote_next);
     }
 
     @Override
     public void initListener() {
         mImageBack.setOnClickListener(this);
         mImageAdd.setOnClickListener(this);
-        mNextAdd.setOnClickListener(this);
+        mBtnNext.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
-        mTextTitle.setText("评优竞选人");
+        mTextTitle.setText("创建活动");
     }
 
     @Override
     public int getLayout() {
-        return R.layout.activity_eva_next;
+        return R.layout.activity_create_vote;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class EvaNextActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.back_add:
                 break;
-            case R.id.next_next:
+            case R.id.vote_next:
                 break;
         }
     }

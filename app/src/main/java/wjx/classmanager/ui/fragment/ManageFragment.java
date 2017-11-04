@@ -4,18 +4,12 @@ import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.util.Log;
-import android.widget.EditText;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.ManageAdapter;
@@ -25,8 +19,6 @@ import wjx.classmanager.presenter.impl.ManagePresenterImpl;
 import wjx.classmanager.utils.SPUtil;
 import wjx.classmanager.view.ManageView;
 
-import static cn.bmob.v3.helper.GsonUtil.toJson;
-import static com.hyphenate.chat.a.a.a.g;
 import static wjx.classmanager.model.Constant.SharePreference.CACHE_LIST;
 
 /**
@@ -48,6 +40,7 @@ public class ManageFragment extends BaseFragment implements ManageView{
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder) {
                 int position = viewHolder.getLayoutPosition();
+                mManagePresenter.checkItemType(mManages.get(position).getTitle());
                 Log.e( "onItemClick: ","click" + mManages.get(position).getTitle());
             }
 
@@ -63,12 +56,12 @@ public class ManageFragment extends BaseFragment implements ManageView{
     @Override
     protected void initView() {
         mManagePresenter = new ManagePresenterImpl(this);
+        mManages =mManagePresenter.getManageList();
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_manage);
-        mManageAdapter =new ManageAdapter(mManagePresenter.getManageList());
+        mManageAdapter =new ManageAdapter(mManages);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mManageAdapter);
-        mManages =mManagePresenter.getManageList();
         initHelper();
     }
 
@@ -155,5 +148,10 @@ public class ManageFragment extends BaseFragment implements ManageView{
     private void cacheList() {
         Gson gson =new Gson();
         SPUtil.cache(mContext,CACHE_LIST,gson.toJson(mManages));
+    }
+
+    @Override
+    public void start(Class activity) {
+        startActivity(activity);
     }
 }

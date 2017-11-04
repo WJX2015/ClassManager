@@ -93,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showProgress(String msg) {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCancelable(true);
             mProgressDialog.setCanceledOnTouchOutside(false);
 
             /**

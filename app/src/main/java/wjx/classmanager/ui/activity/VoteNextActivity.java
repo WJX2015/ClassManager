@@ -110,7 +110,8 @@ public class VoteNextActivity extends BaseActivity implements View.OnClickListen
 
         final String name=mEditName.getText().toString();
         final String motto=mEditPerson.getText().toString();
-        if (!TextUtils.isEmpty(iconUri) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(motto)) {
+        final String desc =mEditDesc.getText().toString();
+        if (!TextUtils.isEmpty(iconUri) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(motto) && !TextUtils.isEmpty(desc)) {
 
             final BmobFile bmobFile = new BmobFile(new File(iconUri));
 
@@ -121,6 +122,7 @@ public class VoteNextActivity extends BaseActivity implements View.OnClickListen
                         //上传头像成功
                         Vote vote=new Vote();
                         vote.setName(name);
+                        vote.setDesc(desc);
                         vote.setTitle(title);
                         vote.setMotto(motto);
                         vote.setAvatar(bmobFile.getFileUrl());
@@ -181,7 +183,9 @@ public class VoteNextActivity extends BaseActivity implements View.OnClickListen
 
         final String name=mEditName.getText().toString();
         final String motto=mEditPerson.getText().toString();
-        if (!TextUtils.isEmpty(iconUri) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(motto)) {
+        final String desc =mEditDesc.getText().toString();
+
+        if (!TextUtils.isEmpty(iconUri) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(motto) && !TextUtils.isEmpty(desc) ) {
 
             final BmobFile bmobFile2 = new BmobFile(new File(iconUri));
             bmobFile2.upload(new UploadFileListener() {
@@ -191,6 +195,7 @@ public class VoteNextActivity extends BaseActivity implements View.OnClickListen
                         //上传图片成功
                         Vote vote2=new Vote();
                         vote2.setName(name);
+                        vote2.setDesc(desc);
                         vote2.setTitle(title);
                         vote2.setMotto(motto);
                         vote2.setAvatar(bmobFile2.getFileUrl());
@@ -228,10 +233,10 @@ public class VoteNextActivity extends BaseActivity implements View.OnClickListen
         SimpleDateFormat format=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss ");
         Date curDate=new Date(System.currentTimeMillis());
         final String time=format.format(curDate);
-        final BmobFile bmobFile = new BmobFile(new File(imageUrl));
+        final BmobFile bmobFile2 = new BmobFile(new File(imageUrl));
 
         //先上传评优活动的背景图
-        bmobFile.upload(new UploadFileListener() {
+        bmobFile2.upload(new UploadFileListener() {
             @Override
             public void done(BmobException e) {
                 if (e==null){
@@ -241,7 +246,7 @@ public class VoteNextActivity extends BaseActivity implements View.OnClickListen
                     voteResult.setTimeForCreate(time);
                     voteResult.setIntroduction(introduce);
                     voteResult.setAppraiseTitle(title);
-                    voteResult.setBackgroundImage(bmobFile.getFileUrl());
+                    voteResult.setBackgroundImage(bmobFile2.getFileUrl());
 
                     voteResult.save(new SaveListener<String>() {
                         @Override

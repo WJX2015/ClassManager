@@ -43,7 +43,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             @Override
             public void onClick(View v) {
                 //跳转到消息Type列表
-                updateMessageItem(position);
+                //updateMessageItem(position);
             }
         });
         holder.mMessageItemView.setOnLongClickListener(new View.OnLongClickListener() {

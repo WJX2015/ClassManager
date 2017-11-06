@@ -178,9 +178,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 mMainPresenter.myClass();
                 break;
             case R.id.left_evaluate:
+                startActivity(EvaluateActivity.class);
                 mMainPresenter.evaluate();
                 break;
             case R.id.left_vote:
+                startActivity(VoteActivity.class);
                 mMainPresenter.activityVote();
                 break;
             case R.id.left_data:
@@ -242,7 +244,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null && intentResult.getContents() != null) {
             String ScanResult = intentResult.getContents();
-            startActivity(JoinClassActivity.class,SCAN_RESULT,ScanResult);
+            Log.e( "onActivityResult: ", ScanResult+"-=-=");
+            //startActivity(JoinClassActivity.class,SCAN_RESULT,ScanResult);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

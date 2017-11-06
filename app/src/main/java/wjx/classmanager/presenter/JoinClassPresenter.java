@@ -5,5 +5,5 @@ package wjx.classmanager.presenter;
  */
 
 public interface JoinClassPresenter {
-    void searchClassFromServer(String s);
+    void getServerData(int pagesize, String cursor);
 }

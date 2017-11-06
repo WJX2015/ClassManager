@@ -19,6 +19,15 @@ public class Vote extends BmobObject{
     private String motto;//座右铭
     private List<String> likeNameList;//投赞成票的人名
     private int likeNum;//投赞成票的数目
+    private String desc;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public String getTitle() {
         return title;

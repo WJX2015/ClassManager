@@ -19,6 +19,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
 import wjx.classmanager.R;
+import wjx.classmanager.application.MyApplication;
 import wjx.classmanager.model.AppraiseResult;
 import wjx.classmanager.ui.activity.ShowAppraseActivity;
 import wjx.classmanager.utils.DownUtil;
@@ -42,7 +43,6 @@ public class AppraiseAdapter extends RecyclerView.Adapter<AppraiseAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.appraise_item_view,parent,false);
         final ViewHolder holder=new ViewHolder(view);
         return holder;
@@ -83,7 +83,7 @@ public class AppraiseAdapter extends RecyclerView.Adapter<AppraiseAdapter.ViewHo
             public void done(String savePath, BmobException e) {
                 if (e==null){
                     //成功
-                    Glide.with(mContext)
+                    Glide.with(MyApplication.getMyContext())
                             .load(savePath)
                             .into(imageViewBg);
                 }else {

@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hyphenate.chat.EMGroupInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +19,10 @@ import wjx.classmanager.widget.JoinClassItemView;
 
 public class JoinClassAdapter extends RecyclerView.Adapter<JoinClassAdapter.JoinClassViewHolder> {
 
-    private List<JoinClass> mJoinClasses=new ArrayList<>();
+    private List<EMGroupInfo> mJoinClasses=new ArrayList<>();
     private Context mContext;
 
-    public JoinClassAdapter(List<JoinClass> joinClasses){
+    public JoinClassAdapter(List<EMGroupInfo> joinClasses){
         mJoinClasses=joinClasses;
     }
 

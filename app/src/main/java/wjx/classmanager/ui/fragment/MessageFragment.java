@@ -68,10 +68,10 @@ public class MessageFragment extends BaseFragment implements MessageView{
     public class MessageReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Message message= (Message) intent.getSerializableExtra(RECEIVE);
-            if(message!=null){
-                mMessageAdapter.addMessageItem(message);
-            }
+//            Message message= (Message) intent.getSerializableExtra(RECEIVE);
+//            if(message!=null){
+//                mMessageAdapter.addMessageItem(message);
+//            }
             Log.e( "onReceive: ","我接收到信息啦" );
         }
     }

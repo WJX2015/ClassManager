@@ -32,8 +32,6 @@ public class ClassCodeActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initData() {
-        String string = getIntent().getStringExtra("");
-
         Display display = getWindow().getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);

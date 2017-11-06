@@ -59,9 +59,48 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vote_desc"/>
 
+    <RelativeLayout
+        android:id="@+id/bg_add"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/em_button_normal_shape"
+        android:padding="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vote_person">
+
+        <TextView
+            android:id="@+id/notify_accessory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="背景图"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/bg_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/notify_accessory"
+            android:text="0"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/btn_add_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/title_bar_add"/>
+    </RelativeLayout>
+
     <Button
         android:id="@+id/vote_next"
-        app:layout_constraintTop_toBottomOf="@+id/vote_person"
+        app:layout_constraintTop_toBottomOf="@+id/bg_add"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

@@ -3,6 +3,7 @@ package wjx.classmanager.presenter.impl;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCursorResult;
 import com.hyphenate.chat.EMGroupInfo;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,37 +18,10 @@ import wjx.classmanager.view.JoinClassView;
  */
 
 public class JoinClassPresenterImpl implements JoinClassPresenter {
-
-    private List<JoinClass> mJoinClasses = new ArrayList<>();
     private JoinClassView mJoinClassView;
 
     public JoinClassPresenterImpl(JoinClassView joinClassView){
         mJoinClassView=joinClassView;
-        initData();
-    }
-
-    private void initData() {
-        for(int i=0;i<20;i++){
-            JoinClass join = new JoinClass("班级"+i);
-            mJoinClasses.add(join);
-        }
-    }
-
-    @Override
-    public void searchClassFromServer(String s) {
-        mJoinClassView.onStartSearch();
-        ThreadUtil.runOnBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-//                EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer();//需异步处理
-//                List<EMGroupInfo> groupsList = List<EMGroupInfo> returnGroups = result.getData();
-//                String cursor = result.getCursor();
-            }
-        });
-    }
-
-    public List<JoinClass> getJoinClassList(){
-        return mJoinClasses;
     }
 
     private void notifySearchSuccess(){
@@ -55,6 +29,35 @@ public class JoinClassPresenterImpl implements JoinClassPresenter {
             @Override
             public void run() {
                 //mJoinClassView.onSearchSuccess();
+            }
+        });
+    }
+
+    @Override
+    public void getServerData(final int pagesize,final String cursor) {
+        ThreadUtil.runOnBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pagesize, cursor);
+                    final List<EMGroupInfo> returnGroups = result.getData();
+
+                    ThreadUtil.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mJoinClassView.getServerDataSuccess(result,returnGroups);
+                        }
+                    });
+
+                }catch (HyphenateException e){
+                    e.printStackTrace();
+                    ThreadUtil.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mJoinClassView.getServerDataFail();
+                        }
+                    });
+                }
             }
         });
     }

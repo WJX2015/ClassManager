@@ -7,6 +7,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hyphenate.chat.EMCursorResult;
+import com.hyphenate.chat.EMGroupInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import wjx.classmanager.R;
 import wjx.classmanager.adapter.JoinClassAdapter;
 import wjx.classmanager.presenter.impl.JoinClassPresenterImpl;
@@ -23,6 +29,11 @@ public class JoinClassActivity extends BaseActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     private JoinClassAdapter mJoinClassAdapter;
     private JoinClassPresenterImpl mJoinClassPresenter;
+    private List<EMGroupInfo> groupsList=new ArrayList<>();
+
+    private String cursor;
+    //分页数量
+    private final int pagesize = 20;
 
     @Override
     public void initView() {
@@ -32,10 +43,11 @@ public class JoinClassActivity extends BaseActivity implements View.OnClickListe
         mTextTitle = (TextView) findViewById(R.id.back_title);
         mEditClass = (EditText) findViewById(R.id.join_input);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_join);
-        mJoinClassAdapter = new JoinClassAdapter(mJoinClassPresenter.getJoinClassList());
+        mJoinClassAdapter = new JoinClassAdapter(groupsList);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mJoinClassAdapter);
+        mJoinClassPresenter.getServerData(pagesize,cursor);
     }
 
     @Override
@@ -63,7 +75,7 @@ public class JoinClassActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.join_search:
-                mJoinClassPresenter.searchClassFromServer(mEditClass.getText().toString());
+
                 break;
             case R.id.back_image:
                 finish();
@@ -76,13 +88,20 @@ public class JoinClassActivity extends BaseActivity implements View.OnClickListe
         showProgress("努力查找中...");
     }
 
-    /**
-     * 是否有数据传过来
-     */
-    private void initIntentData(){
-        String groupId=getIntent().getStringExtra(SCAN_RESULT);
-        if(groupId!=null){
-            mJoinClassPresenter.searchClassFromServer(groupId);
-        }
+    @Override
+    public void getServerDataSuccess(EMCursorResult<EMGroupInfo> result, List<EMGroupInfo> returnGroups) {
+        groupsList.addAll(returnGroups);
+        updateAdapter();
+    }
+
+    private void updateAdapter() {
+        mJoinClassAdapter = new JoinClassAdapter(groupsList);
+        mRecyclerView.setAdapter(mJoinClassAdapter);
+        mJoinClassAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getServerDataFail() {
+
     }
 }
